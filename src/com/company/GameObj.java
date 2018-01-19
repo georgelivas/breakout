@@ -25,9 +25,7 @@ public class GameObj {
      * @param heightIs height of the game object
      * @param colour Colour of the game object
      */
-    public GameObj( float x, float y,
-                  float widthIs, float heightIs, Colour colour )
-    {
+    public GameObj(float x, float y, float widthIs, float heightIs, Colour colour) {
       topX   = x;       topY = y;
       width  = widthIs; height = heightIs;
       this.colour = colour;

@@ -11,9 +11,9 @@ public class Controller {
     private View  view;    // View of game
 
     public Controller(Model aBreakOutModel, View aBreakOutView ) {
-        model  = aBreakOutModel;
-        view   = aBreakOutView;
-        view.setController( this );    // View could talk to controller
+        model = aBreakOutModel;
+        view = aBreakOutView;
+        view.setController(this);    // View could talk to controller
     }
 
     /**

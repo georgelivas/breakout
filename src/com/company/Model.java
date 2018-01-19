@@ -47,14 +47,14 @@ public class Model extends Observable {
 
     public void createGameObjects() {
         synchronized(Model.class) {
-            ball   = new GameObj(W/2, H/2, BALL_SIZE, BALL_SIZE, Colour.RED );
+            ball   = new GameObj(W/2, H/2, BALL_SIZE, BALL_SIZE, Colour.RED);
             bat    = new GameObj(W/2, H - BRICK_HEIGHT*1.5f, BRICK_WIDTH*3,
-                    BRICK_HEIGHT/4, Colour.GRAY);
+                    BRICK_HEIGHT/4, Colour.WHITE);
             bricks = new ArrayList<>();
             // *[1]******************************************************[1]*
             // * Fill in code to place the bricks on the board              *
             // **************************************************************
-
+            bricks.add(new GameObj(200, 200, 100, 70, Colour.RED));
         }
     }
 
@@ -123,9 +123,11 @@ public class Model extends Observable {
         // *[2]******************************************************[2]*
         // * Fill in code to prevent the bat being moved off the screen *
         // **************************************************************
-        float dist = direction * BAT_MOVE;    // Actual distance to move
-        Debug.trace( "Model: Move bat = %6.2f", dist );
-        bat.moveX(dist);
+        if (bat.getX() < 420 && direction > 0 || bat.getX() > 30 && direction < 0) {
+            float dist = direction * BAT_MOVE;    // Actual distance to move
+            Debug.trace("Model: Move bat = %6.2f", dist);
+            bat.moveX(dist);
+        }
     }
 
     /**
@@ -134,10 +136,7 @@ public class Model extends Observable {
      */
     class ActivePart {
         private boolean runGame = true;
-
-        public void stop()
-        {
-
+        public void stop() {
             runGame = false;
         }
 

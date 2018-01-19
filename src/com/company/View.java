@@ -34,7 +34,6 @@ public class View extends JFrame implements Observer {
      */
     public View(int width, int height) {
         this.width = width; this.height = height;
-
         setSize(width, height);                 // Size of window
         addKeyListener( new Transaction() );    // Called when key press
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -62,7 +61,8 @@ public class View extends JFrame implements Observer {
 
             displayGameObj(g, ball);   // Display the Ball
             displayGameObj(g, bat);   // Display the Bat
-
+            //first attempt
+            displayGameObj(g, bricks.get(0));
 
             // *[4]****************************************************[4]*
             // * Display the bricks that make up the game                 *
@@ -71,13 +71,14 @@ public class View extends JFrame implements Observer {
             // ************************************************************
 
             // Display state of game
-            g.setPaint( Color.black );
-            FontMetrics fm = getFontMetrics( font );
+            g.setPaint(Color.black);
+            FontMetrics fm = getFontMetrics(font);
             String fmt = "BreakOut: Score = [%6d] fps=%5.1f";
             String text = String.format(fmt, score,
                     frames/(Timer.timeTaken()/1000.0)
             );
-            if ( frames > RESET_AFTER ) {
+
+            if (frames > RESET_AFTER ) {
                 frames = 0; Timer.startTimer();
             }
             g.drawString(text,width/2-fm.stringWidth(text)/2,80);
@@ -103,12 +104,12 @@ public class View extends JFrame implements Observer {
     public void update( Observable aModel, Object arg ) {
         Model model = (Model) aModel;
         // Get from the model the ball, bat, bricks & score
-        ball    = model.getBall();              // Ball
-        bricks  = model.getBricks();            // Bricks
-        bat     = model.getBat();               // Bat
-        score   = model.getScore();             // Score
-        //Debug.trace("Update");
-        repaint();                              // Re draw game
+        ball = model.getBall();                  // Ball
+        bricks = model.getBricks();              // Bricks
+        bat = model.getBat();                    // Bat
+        score = model.getScore();                // Score
+        // Debug.trace("Update");
+        repaint();                               // Re draw game
     }
 
     /**
@@ -116,8 +117,8 @@ public class View extends JFrame implements Observer {
      * @param g    Graphics context
      */
     @Override
-    public void update( Graphics g ) {        // Called by repaint
-        drawPicture( (Graphics2D) g );        // Draw Picture
+    public void update(Graphics g) {        // Called by repaint
+        drawPicture((Graphics2D) g);        // Draw Picture
     }
 
     /**
@@ -138,15 +139,15 @@ public class View extends JFrame implements Observer {
      * @param g The graphics context
      */
     private void drawPicture( Graphics2D g ) {      // Double buffer
-                                                    //  to avoid flicker
-        if ( bricks == null ) return;               // Race condition
-        if (  theAG == null ) {
+                                                    // to avoid flicker
+        if (bricks == null) return;                 // Race condition
+        if (theAG == null) {
             Dimension d = getSize();              // Size of curr. image
             theAI = (BufferedImage) createImage(d.width, d.height);
             theAG = theAI.createGraphics();
         }
-        drawActualPicture(theAG);                              // Draw Actual Picture
-        g.drawImage(theAI, 0, 0, this );        // Display on screen
+        drawActualPicture(theAG);                               //Draw Actual Picture
+        g.drawImage(theAI, 0, 0, this );         //Display on screen
     }
 
     /**
