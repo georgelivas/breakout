@@ -7,15 +7,20 @@ import java.awt.*;
  *  from most of the program.
  * Map to Swing color when required.
  */
-public enum Colour  
-{ 
-  RED(Color.RED), BLUE(Color.BLUE), GRAY(Color.GRAY);
+public enum Colour {
+    RED(Color.RED),
+    BLUE(Color.BLUE),
+    GRAY(Color.GRAY);
 
-  private final Color c;
+    private final Color c;
 
-  Colour( Color c ) { this.c = c; }
+    Colour( Color c ) {
+        this.c = c;
+    }
 
-  public Color forSwing() { return c; }
+    public Color forSwing() {
+        return c;
+    }
 }
 
 
