@@ -15,7 +15,6 @@ public class Main
 
   public static void main( String args[] )
   {
-    
     Debug.trace("BreakOut");
     Debug.set( true );              // Set true to get debug info
 
