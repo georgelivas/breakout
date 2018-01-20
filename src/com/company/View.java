@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.geom.Rectangle2D;
+import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.Observable;
@@ -53,17 +54,21 @@ public class View extends JFrame implements Observer {
         frames++;
         synchronized(Model.class) { // Make thread safe
             // White background
-            g.setPaint(Color.GRAY);
-            g.fill( new Rectangle2D.Float( 0, 0, width, height) );
+            g.setPaint(Color.BLACK);
+            System.out.println(g);
+            g.fill(new Rectangle2D.Float( 0, 0, width, height));
 
             Font font = new Font("Monospaced",Font.BOLD,24);
             g.setFont( font );
 
-            displayGameObj(g, ball);   // Display the Ball
+            displayBall(g, ball);   // Display the Ball
             displayGameObj(g, bat);   // Display the Bat
             //first attempt
-            displayGameObj(g, bricks.get(0));
-
+            for (int i = 0; i < bricks.size(); i++) {
+                if (bricks.get(i).isVisible()) {
+                    displayGameObj(g, bricks.get(i));
+                }
+            }
             // *[4]****************************************************[4]*
             // * Display the bricks that make up the game                 *
             // * Fill in code to display bricks                           *
@@ -88,10 +93,22 @@ public class View extends JFrame implements Observer {
     private void displayGameObj( Graphics2D g, GameObj go ) {
         g.setColor( go.getColour().forSwing() );
         g.fill(
-                new Rectangle2D.Float( go.getX(),
+                new Rectangle2D.Float(
+                    go.getX(),
                     go.getY(),
                     go.getWidth(),
                     go.getHeight() )
+        );
+    }
+
+    private void displayBall( Graphics2D g, GameObj go ) {
+        g.setColor( go.getColour().forSwing() );
+        g.fill(
+                new Ellipse2D.Float(
+                        go.getX(),
+                        go.getY(),
+                        go.getWidth(),
+                        go.getHeight() )
         );
     }
 

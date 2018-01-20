@@ -11,31 +11,31 @@ import java.util.Observable;
 
 public class Model extends Observable {
     // Boarder
-    private static final int B              = 6;  // Border offset
-    private static final int M              = 40; // Menu offset
+    private static final int B = 6;                 // Border offset
+    private static final int M = 40;                // Menu offset
 
     // Size of things
-    private static final float BALL_SIZE    = 30; // Ball side
-    private static final float BRICK_WIDTH  = 50; // Brick size
+    private static final float BALL_SIZE = 30;      // Ball side
+    private static final float BRICK_WIDTH = 50;    // Brick size
     private static final float BRICK_HEIGHT = 30;
 
-    private static final int BAT_MOVE       = 5; // Distance to move bat
+    private static final int BAT_MOVE = 5;          // Distance to move bat
 
     // Scores
-    private static final int HIT_BRICK      = 50;  // Score
-    private static final int HIT_BOTTOM     = -200;// Score
+    private static final int HIT_BRICK = 50;        // Score
+    private static final int HIT_BOTTOM = -200;     // Score
 
-    private GameObj ball;          // The ball
-    private List<GameObj> bricks;  // The bricks
-    private GameObj bat;           // The bat
+    private GameObj ball;                           // The ball
+    private List<GameObj> bricks;                   // The bricks
+    private GameObj bat;                            // The bat
 
-    private boolean runGame = true; // Game running
-    private boolean fast = false;   // Sleep in run loop
+    private boolean runGame = true;                 // Game running
+    private boolean fast = false;                   // Sleep in run loop
 
     private int score = 0;
 
-    private final float W;         // Width of area
-    private final float H;         // Height of area
+    private final float W;                          // Width of area
+    private final float H;                          // Height of area
 
     public Model( int width, int height ) {
         this.W = width; this.H = height;
@@ -45,29 +45,31 @@ public class Model extends Observable {
      * Create in the model the objects that form the game
      */
 
+
+
     public void createGameObjects() {
         synchronized(Model.class) {
             ball   = new GameObj(W/2, H/2, BALL_SIZE, BALL_SIZE, Colour.RED);
             bat    = new GameObj(W/2, H - BRICK_HEIGHT*1.5f, BRICK_WIDTH*3,
                     BRICK_HEIGHT/4, Colour.WHITE);
-            bricks = new ArrayList<>();
+            bricks = Levels.level1();
             // *[1]******************************************************[1]*
             // * Fill in code to place the bricks on the board              *
             // **************************************************************
-            bricks.add(new GameObj(200, 200, 100, 70, Colour.RED));
+
         }
     }
 
-    private ActivePart active  = null;
+    private ActivePart active = null;
 
     /**
      * Start the continuous updates to the game
      */
     public void startGame() {
-        synchronized ( Model.class ) {
+        synchronized (Model.class) {
             stopGame();
             active = new ActivePart();
-            Thread t = new Thread( active::runAsSeparateThread );
+            Thread t = new Thread(active::runAsSeparateThread);
             t.setDaemon(true);   // So may die when program exits
             t.start();
         }
@@ -165,7 +167,7 @@ public class Model extends Observable {
 
                         if (y >= H - B - BALL_SIZE) {  // Bottom
 
-                            ball.changeDirectionY(); addToScore( HIT_BOTTOM );
+                            ball.changeDirectionY(); addToScore(HIT_BOTTOM);
                         }
 
                         if (y <= 0 + M) {
@@ -182,6 +184,14 @@ public class Model extends Observable {
                         // * Fill in code to check if a visible brick has been hit      *
                         // *      The ball has no effect on an invisible brick          *
                         // **************************************************************
+
+                        for (int i = 0; i < bricks.size(); i++) {
+                            if (bricks.get(i).hitBy(ball) && bricks.get(i).isVisible()) {
+                                hit = true;
+                                bricks.get(i).setVisibility(false);
+                                score += HIT_BRICK;
+                            }
+                        }
 
                         if (hit) {
                             ball.changeDirectionY();
@@ -207,7 +217,8 @@ public class Model extends Observable {
      *  can redraw the current state of the game
      */
     public void modelChanged() {
-        setChanged(); notifyObservers();
+        setChanged();
+        notifyObservers();
     }
 
 }

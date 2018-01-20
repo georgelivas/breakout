@@ -8,9 +8,13 @@ import java.awt.*;
  * Map to Swing color when required.
  */
 public enum Colour {
-    RED(Color.RED),
-    BLUE(Color.BLUE),
+    YELLOW(Color.decode("#FBCB2F")),
+    GREEN(Color.decode("#20CE28")),
+    RED(Color.decode("#F00F1A")),
+    BLUE(Color.decode("#1C99F9")),
+    PURPLE(Color.decode("#9E3EFA")),
     WHITE(Color.WHITE),
+    BLACK(Color.black),
     GRAY(Color.GRAY);
 
     private final Color c;

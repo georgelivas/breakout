@@ -16,6 +16,7 @@ public class GameObj {
     private Colour colour;       // Colour of object
     private int   dirX   = 1;    // Direction X (1 or -1)
     private int   dirY   = 1;    // Direction Y (1 or -1)
+    private int radii = 8;
 
     /**
      * Constructor for a game object (x,y width, height, colour)
@@ -35,7 +36,7 @@ public class GameObj {
      * Set the game object visibility
      * @param state is visible true or false
      */
-    public void setVisibility( boolean state ) {
+    public void setVisibility(boolean state) {
         canSee = state;
     }
 
