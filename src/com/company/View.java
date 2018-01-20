@@ -55,7 +55,6 @@ public class View extends JFrame implements Observer {
         synchronized(Model.class) { // Make thread safe
             // White background
             g.setPaint(Color.BLACK);
-            System.out.println(g);
             g.fill(new Rectangle2D.Float( 0, 0, width, height));
 
             Font font = new Font("Monospaced",Font.BOLD,24);
