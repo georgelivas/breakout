@@ -53,7 +53,7 @@ public class View extends JFrame implements Observer {
         final int  RESET_AFTER = 200; // Movements
         frames++;
         synchronized(Model.class) { // Make thread safe
-            // White background
+            // BLACK background
             g.setPaint(Color.BLACK);
             g.fill(new Rectangle2D.Float( 0, 0, width, height));
 
@@ -62,7 +62,7 @@ public class View extends JFrame implements Observer {
 
             displayBall(g, ball);   // Display the Ball
             displayGameObj(g, bat);   // Display the Bat
-            //first attempt
+            // Display the bricks
             for (int i = 0; i < bricks.size(); i++) {
                 if (bricks.get(i).isVisible()) {
                     displayGameObj(g, bricks.get(i));
@@ -75,9 +75,9 @@ public class View extends JFrame implements Observer {
             // ************************************************************
 
             // Display state of game
-            g.setPaint(Color.black);
+            g.setPaint(Color.WHITE);
             FontMetrics fm = getFontMetrics(font);
-            String fmt = "BreakOut: Score = [%6d] fps=%5.1f";
+            String fmt = "Score: %6d fps=%5.1f";
             String text = String.format(fmt, score,
                     frames/(Timer.timeTaken()/1000.0)
             );

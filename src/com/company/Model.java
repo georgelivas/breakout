@@ -6,7 +6,6 @@ import java.util.Observable;
 
 /**
  * Model of the game of breakout
- * @author Mike Smith University of Brighton
  */
 
 public class Model extends Observable {

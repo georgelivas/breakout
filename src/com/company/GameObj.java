@@ -4,7 +4,6 @@ package com.company;
  * An Object in the game, represented as a rectangle.
  *  Which holds details of shape, plus possible direction of travel.
  * Would be better to use inheritance.
- * @author Mike Smith University of Brighton
  */
 public class GameObj {
     // All the variables below are vital to the state of the object
@@ -16,7 +15,6 @@ public class GameObj {
     private Colour colour;       // Colour of object
     private int   dirX   = 1;    // Direction X (1 or -1)
     private int   dirY   = 1;    // Direction Y (1 or -1)
-    private int radii = 8;
 
     /**
      * Constructor for a game object (x,y width, height, colour)

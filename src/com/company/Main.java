@@ -6,7 +6,6 @@ package com.company;
  *    the actual play of the game
  *  Note: Many issues of mutual exclusion on shared variables
  *        are ignored.
- * @author Mike Smith University of Brighton
  */
 public class Main {
     public static final int H = 800; // Height of window
