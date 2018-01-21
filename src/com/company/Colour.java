@@ -14,7 +14,9 @@ public enum Colour {
     BLUE(Color.decode("#1C99F9")),
     PURPLE(Color.decode("#9E3EFA")),
     WHITE(Color.WHITE),
+    SILVER(Color.decode("#C0C0C0")),
     BLACK(Color.black),
+    ORANGE(Color.decode("#FBBA38")),
     GRAY(Color.GRAY);
 
     private final Color c;

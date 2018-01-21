@@ -23,6 +23,7 @@ public class View extends JFrame implements Observer {
     private List<GameObj> bricks;     // The bricks
     private int score =  0;           // The score
     private int frames = 0;           // Frames output
+    private int lives = 0;
 
 
     public final int width;   // Size of screen Width
@@ -85,7 +86,16 @@ public class View extends JFrame implements Observer {
             if (frames > RESET_AFTER ) {
                 frames = 0; Timer.startTimer();
             }
-            g.drawString(text,width/2-fm.stringWidth(text)/2,80);
+            g.drawString(text,10,height-5);
+
+            String lives = "";
+            for(int i = 0; i < this.lives; i++) {
+                lives += "♥";
+            }
+
+            g.setPaint(Color.RED);
+            FontMetrics fm1 = getFontMetrics(font);
+            g.drawString(lives,width-50,height-5);
         }
     }
 
@@ -124,6 +134,7 @@ public class View extends JFrame implements Observer {
         bricks = model.getBricks();              // Bricks
         bat = model.getBat();                    // Bat
         score = model.getScore();                // Score
+        lives = model.getLives();
         // Debug.trace("Update");
         repaint();                               // Re draw game
     }

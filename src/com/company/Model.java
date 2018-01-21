@@ -1,6 +1,5 @@
 package com.company;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
@@ -14,7 +13,7 @@ public class Model extends Observable {
     private static final int M = 40;                // Menu offset
 
     // Size of things
-    private static final float BALL_SIZE = 30;      // Ball side
+    private static final float BALL_SIZE = 20;      // Ball side
     private static final float BRICK_WIDTH = 50;    // Brick size
     private static final float BRICK_HEIGHT = 30;
 
@@ -35,27 +34,29 @@ public class Model extends Observable {
 
     private final float W;                          // Width of area
     private final float H;                          // Height of area
+    private final int level;
+    private int lives = 3;
+    private static boolean gameOver = false;
 
-    public Model( int width, int height ) {
-        this.W = width; this.H = height;
+    public Model(int width, int height, int level) {
+        this.W = width;
+        this.H = height;
+        this.level = level;
     }
 
     /**
      * Create in the model the objects that form the game
      */
 
-
-
     public void createGameObjects() {
         synchronized(Model.class) {
-            ball   = new GameObj(W/2, H/2, BALL_SIZE, BALL_SIZE, Colour.RED);
-            bat    = new GameObj(W/2, H - BRICK_HEIGHT*1.5f, BRICK_WIDTH*3,
+            ball   = new GameObj(W/2, H/2, BALL_SIZE, BALL_SIZE, Colour.SILVER);
+            bat    = new GameObj(W/2, H - (BRICK_HEIGHT*1.5f)-20, (BRICK_WIDTH*3)/level,
                     BRICK_HEIGHT/4, Colour.WHITE);
-            bricks = Levels.level1();
+            bricks = level == 1 ? Levels.level1() : Levels.level2();
             // *[1]******************************************************[1]*
             // * Fill in code to place the bricks on the board              *
             // **************************************************************
-
         }
     }
 
@@ -68,6 +69,7 @@ public class Model extends Observable {
         synchronized (Model.class) {
             stopGame();
             active = new ActivePart();
+            active.setSpeed(level == 1 ? 4 : 5);
             Thread t = new Thread(active::runAsSeparateThread);
             t.setDaemon(true);   // So may die when program exits
             t.start();
@@ -80,7 +82,10 @@ public class Model extends Observable {
      */
     public void stopGame() {
         synchronized ( Model.class ) {
-            if ( active != null ) { active.stop(); active = null; }
+            if ( active != null ) {
+                active.stop();
+                active = null;
+            }
         }
     }
 
@@ -108,6 +113,10 @@ public class Model extends Observable {
         return score;
     }
 
+    public int getLives() {
+        return this.lives;
+    }
+
     /**
      * Set speed of ball to be fast (true/ false)
      * @param fast Set to true if require fast moving ball
@@ -120,14 +129,22 @@ public class Model extends Observable {
      * Move the bat. (-1) is left or (+1) is right
      * @param direction - The direction to move
      */
-    public void moveBat( int direction ) {
+    public void moveBat(int direction) {
         // *[2]******************************************************[2]*
         // * Fill in code to prevent the bat being moved off the screen *
         // **************************************************************
-        if (bat.getX() < 420 && direction > 0 || bat.getX() > 30 && direction < 0) {
-            float dist = direction * BAT_MOVE;    // Actual distance to move
-            Debug.trace("Model: Move bat = %6.2f", dist);
-            bat.moveX(dist);
+        if (level == 2) {
+            if (bat.getX() < 500 && direction > 0 || bat.getX() >= 40 && direction < 0) {
+                float dist = direction * BAT_MOVE * level;    // Actual distance to move
+                Debug.trace("Model: Move bat = %6.2f", dist);
+                bat.moveX(dist);
+            }
+        } else {
+            if (bat.getX() < 420 && direction > 0 || bat.getX() > 30 && direction < 0) {
+                float dist = direction * BAT_MOVE * level;    // Actual distance to move
+                Debug.trace("Model: Move bat = %6.2f", dist);
+                bat.moveX(dist);
+            }
         }
     }
 
@@ -140,18 +157,23 @@ public class Model extends Observable {
         public void stop() {
             runGame = false;
         }
+        public int speed;
+
+        public void setSpeed(int speed) {
+            this.speed = speed;
+        }
 
         public void runAsSeparateThread() {
-            final float S = 3; // Units to move (Speed)
+            final float S = speed; // Units to move (Speed)
             try {
-                synchronized (Model.class) { // Make thread safe
-                    GameObj ball = getBall();     // Ball in game
-                    GameObj bat = getBat();      // Bat
+                synchronized (Model.class) {        // Make thread safe
+                    GameObj ball = getBall();       // Ball in game
+                    GameObj bat = getBat();         // Bat
                     List<GameObj> bricks = getBricks();   // Bricks
                 }
 
                 while (runGame) {
-                    synchronized ( Model.class ) { // Make thread safe
+                    synchronized (Model.class) { // Make thread safe
                         float x = ball.getX();  // Current x,y position
                         float y = ball.getY();
                         // Deal with possible edge of board hit
@@ -160,23 +182,20 @@ public class Model extends Observable {
                             ball.changeDirectionX();
                         }
 
-                        if (x <= 0 + B) {
+                        if (x <= B) {
                             ball.changeDirectionX();
                         }
 
-                        if (y >= H - B - BALL_SIZE) {  // Bottom
+                        if (y >= H - B - BALL_SIZE - 30) {  // Bottom
 
-                            ball.changeDirectionY(); addToScore(HIT_BOTTOM);
+                            ball.changeDirectionY();
+                            addToScore(HIT_BOTTOM);
+                            lives--;
                         }
 
-                        if (y <= 0 + M) {
+                        if (y <= M) {
                             ball.changeDirectionY();
                         }
-
-                        // As only a hit on the bat/ball is detected it is
-                        //  assumed to be on the top or bottom of the object.
-                        // A hit on the left or right of the object
-                        //  has an interesting affect
 
                         boolean hit = false;
                         // *[3]******************************************************[3]*
@@ -185,11 +204,31 @@ public class Model extends Observable {
                         // **************************************************************
 
                         for (int i = 0; i < bricks.size(); i++) {
-                            if (bricks.get(i).hitBy(ball) && bricks.get(i).isVisible()) {
-                                hit = true;
-                                bricks.get(i).setVisibility(false);
-                                score += HIT_BRICK;
+                            if (level == 1) {
+                                if (bricks.get(i).hitBy(ball) && bricks.get(i).isVisible()) {
+                                    hit = true;
+                                    bricks.get(i).setVisibility(false);
+                                    score += HIT_BRICK;
+                                }
+                            } else {
+                                if (bricks.get(i).hitBy(ball) && bricks.get(i).isVisible()) {
+                                    hit = true;
+                                    if (bricks.get(i).getTimesHit() > 0) {
+                                        bricks.get(i).setVisibility(false);
+                                        score += HIT_BRICK;
+                                    } else {
+                                        bricks.get(i).increaseTimesHit();
+                                        bricks.get(i).setColour(Colour.RED);
+                                    }
+                                }
                             }
+                            int brokenBricks = 0;
+                            for (int j = 0; j <bricks.size(); j++) {
+                                if (!bricks.get(j).isVisible()) {
+                                    brokenBricks++;
+                                }
+                            }
+                            gameOver = brokenBricks == bricks.size();
                         }
 
                         if (hit) {
@@ -198,6 +237,14 @@ public class Model extends Observable {
 
                         if (ball.hitBy(bat)) {
                             ball.changeDirectionY();
+                        }
+
+                        if (lives == 0) {
+                            gameOver = true;
+                        }
+
+                        if (gameOver) {
+                            stop();
                         }
                     }
                     modelChanged(); // Model changed refresh screen

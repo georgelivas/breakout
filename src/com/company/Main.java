@@ -15,14 +15,14 @@ public class Main {
         Debug.trace("BreakOut");
         Debug.set( true );              // Set true to get debug info
 
-        Model model = new Model(W,H);   // model of the Game
+        Model model = new Model(W, H, 2);   // model of the Game
         View  view  = new View(W,H);    // View of the Game
         new Controller( model, view );
 
         model.createGameObjects();       // Ball, Bat & Bricks
-        model.addObserver( view );       // Add observer to the model
+        model.addObserver(view);       // Add observer to the model
 
         view.setVisible(true);           // Make visible
-        model.startGame();               // Start playing the game
+        model.startGame();        // Start playing the game
     }
 }

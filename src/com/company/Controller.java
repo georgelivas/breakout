@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
  */
 public class Controller {
     private Model model;   // Model of game
-    private View  view;    // View of game
+    private View view;    // View of game
 
     public Controller(Model aBreakOutModel, View aBreakOutView ) {
         model = aBreakOutModel;

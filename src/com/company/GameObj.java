@@ -15,6 +15,7 @@ public class GameObj {
     private Colour colour;       // Colour of object
     private int   dirX   = 1;    // Direction X (1 or -1)
     private int   dirY   = 1;    // Direction Y (1 or -1)
+    private int timesHit = 0;
 
     /**
      * Constructor for a game object (x,y width, height, colour)
@@ -25,8 +26,10 @@ public class GameObj {
      * @param colour Colour of the game object
      */
     public GameObj(float x, float y, float widthIs, float heightIs, Colour colour) {
-      topX   = x;       topY = y;
-      width  = widthIs; height = heightIs;
+      topX = x;
+      topY = y;
+      width = widthIs;
+      height = heightIs;
       this.colour = colour;
     }
 
@@ -77,6 +80,14 @@ public class GameObj {
      *  @return The height of the game Object
      */
 
+    public int getTimesHit() {
+        return this.timesHit;
+    }
+
+    public void increaseTimesHit() {
+        this.timesHit++;
+    }
+
     public float getHeight() {
         return height;
     }
@@ -88,6 +99,10 @@ public class GameObj {
 
     public Colour getColour() {
         return colour;
+    }
+
+    public void setColour(Colour c) {
+        this.colour = c;
     }
 
     /**
