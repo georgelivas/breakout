@@ -145,7 +145,7 @@ public class GameObj {
      *  @return collision True/ False
      */
 
-    public boolean hitBy( GameObj obj )
+    public boolean hitBy(GameObj obj)
     {
       return !(
               topX >= obj.topX+obj.width

@@ -51,7 +51,7 @@ public class Model extends Observable {
     public void createGameObjects() {
         synchronized(Model.class) {
             ball   = new GameObj(W/2, H/2, BALL_SIZE, BALL_SIZE, Colour.SILVER);
-            bat    = new GameObj(W/2, H - (BRICK_HEIGHT*1.5f)-20, (BRICK_WIDTH*3)/level,
+            bat    = new GameObj(W/2, H - (BRICK_HEIGHT*1.5f), (BRICK_WIDTH*3)/level,
                     BRICK_HEIGHT/4, Colour.WHITE);
             bricks = level == 1 ? Levels.level1() : Levels.level2();
             // *[1]******************************************************[1]*
@@ -179,10 +179,12 @@ public class Model extends Observable {
                         // Deal with possible edge of board hit
 
                         if (x >= W - B - BALL_SIZE) {
+                            PlaySound.wallBeep();
                             ball.changeDirectionX();
                         }
 
                         if (x <= B) {
+                            PlaySound.wallBeep();
                             ball.changeDirectionX();
                         }
 
@@ -194,6 +196,7 @@ public class Model extends Observable {
                         }
 
                         if (y <= M) {
+                            PlaySound.wallBeep();
                             ball.changeDirectionY();
                         }
 
@@ -207,6 +210,7 @@ public class Model extends Observable {
                             if (level == 1) {
                                 if (bricks.get(i).hitBy(ball) && bricks.get(i).isVisible()) {
                                     hit = true;
+                                    PlaySound.smash();
                                     bricks.get(i).setVisibility(false);
                                     score += HIT_BRICK;
                                 }
@@ -214,9 +218,11 @@ public class Model extends Observable {
                                 if (bricks.get(i).hitBy(ball) && bricks.get(i).isVisible()) {
                                     hit = true;
                                     if (bricks.get(i).getTimesHit() > 0) {
+                                        PlaySound.smash();
                                         bricks.get(i).setVisibility(false);
                                         score += HIT_BRICK;
                                     } else {
+                                        PlaySound.smash();
                                         bricks.get(i).increaseTimesHit();
                                         bricks.get(i).setColour(Colour.RED);
                                     }
@@ -237,6 +243,7 @@ public class Model extends Observable {
 
                         if (ball.hitBy(bat)) {
                             ball.changeDirectionY();
+                            PlaySound.bat();
                         }
 
                         if (lives == 0) {
