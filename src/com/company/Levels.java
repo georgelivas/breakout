@@ -28,6 +28,7 @@ public class Levels {
         bricks.add(new GameObj(20, dist, BRICK_WIDTH, BRICK_HEIGHT, Colour.YELLOW));
         dist +=31;
         bricks.add(new GameObj(20, dist, BRICK_WIDTH, BRICK_HEIGHT, Colour.PURPLE));
+
         dist = 50; // reset dist
 
         bricks.add(new GameObj(72, dist, BRICK_WIDTH, BRICK_HEIGHT, Colour.YELLOW));
