@@ -8,29 +8,29 @@ import java.io.*;
 class PlaySound {
 
     public static void smash() {
-        play(new File("/Users/georgelivas/GitHub/breakout_0.1.1/src/com/company/sounds/smash.wav"));
+        play(new File("src/com/company/sounds/smash.wav"));
 
     }
 
     public static void bat() {
-       play(new File("/Users/georgelivas/GitHub/breakout_0.1.1/src/com/company/sounds/bat.wav"));
+       play(new File("src/com/company/sounds/bat.wav"));
 
     }
 
     public static void wallBeep() {
-        play(new File("/Users/georgelivas/GitHub/breakout_0.1.1/src/com/company/sounds/beep.wav"));
+        play(new File("src/com/company/sounds/beep.wav"));
     }
 
     public static void bottomBeep() {
-        play(new File("/Users/georgelivas/GitHub/breakout_0.1.1/src/com/company/sounds/bottomBeep.wav"));
+        play(new File("src/com/company/sounds/bottomBeep.wav"));
     }
 
     public static void youWin() {
-        play(new File("/Users/georgelivas/GitHub/breakout_0.1.1/src/com/company/sounds/youWin.wav"));
+        play(new File("src/com/company/sounds/youWin.wav"));
     }
 
     public static void gameOver() {
-        play(new File("/Users/georgelivas/GitHub/breakout_0.1.1/src/com/company/sounds/gameOver.wav"));
+        play(new File("src/com/company/sounds/gameOver.wav"));
     }
 
     public static void play(File sound) {
