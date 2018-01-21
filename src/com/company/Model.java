@@ -165,6 +165,7 @@ public class Model extends Observable {
 
         public void runAsSeparateThread() {
             final float S = speed; // Units to move (Speed)
+            boolean hitBottom = false;
             try {
                 synchronized (Model.class) {        // Make thread safe
                     GameObj ball = getBall();       // Ball in game
@@ -193,6 +194,7 @@ public class Model extends Observable {
                             ball.changeDirectionY();
                             addToScore(HIT_BOTTOM);
                             lives--;
+                            hitBottom = true;
                         }
 
                         if (y <= M) {
@@ -201,6 +203,7 @@ public class Model extends Observable {
                         }
 
                         boolean hit = false;
+
                         // *[3]******************************************************[3]*
                         // * Fill in code to check if a visible brick has been hit      *
                         // *      The ball has no effect on an invisible brick          *
@@ -259,6 +262,29 @@ public class Model extends Observable {
                             stop();
                         }
                     }
+                    if (hitBottom && !gameOver) {
+                        try{
+                            ball.setVisibility(false);
+                            modelChanged();
+                            Thread.sleep(1000);
+                            ball.setTopX(bat.getX()+(bat.getWidth()/2));
+                            ball.setTopY(H/2);
+                            modelChanged();
+                            Thread.sleep(100);
+                            ball.setColour(Colour.RED);
+                            modelChanged();
+                            Thread.sleep(1000);
+                            ball.setVisibility(true);
+                            modelChanged();
+                            Thread.sleep(100);
+                            ball.changeDirectionY();
+                            ball.setColour(Colour.SILVER);
+                            hitBottom =false;
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                    }
+
                     modelChanged(); // Model changed refresh screen
                     Thread.sleep(fast ? 2 : 20);
                     ball.moveX(S);

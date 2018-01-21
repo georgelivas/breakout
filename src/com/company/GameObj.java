@@ -66,6 +66,14 @@ public class GameObj {
         return topY;
     }
 
+    public void setTopX(float topX) {
+        this.topX = topX;
+    }
+
+    public void setTopY(float topY) {
+        this.topY = topY;
+    }
+
     /**
      * The width of the game object
      *  @return The width of the game Object
