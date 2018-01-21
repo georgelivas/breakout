@@ -189,7 +189,7 @@ public class Model extends Observable {
                         }
 
                         if (y >= H - B - BALL_SIZE - 30) {  // Bottom
-
+                            PlaySound.bottomBeep();
                             ball.changeDirectionY();
                             addToScore(HIT_BOTTOM);
                             lives--;
@@ -234,7 +234,11 @@ public class Model extends Observable {
                                     brokenBricks++;
                                 }
                             }
-                            gameOver = brokenBricks == bricks.size();
+
+                            if (brokenBricks == bricks.size()) {
+                                gameOver = true;
+                                PlaySound.youWin();
+                            }
                         }
 
                         if (hit) {
@@ -248,6 +252,7 @@ public class Model extends Observable {
 
                         if (lives == 0) {
                             gameOver = true;
+                            PlaySound.gameOver();
                         }
 
                         if (gameOver) {

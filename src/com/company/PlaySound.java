@@ -25,6 +25,14 @@ class PlaySound {
         play(new File("/Users/georgelivas/GitHub/breakout_0.1.1/src/com/company/sounds/bottomBeep.wav"));
     }
 
+    public static void youWin() {
+        play(new File("/Users/georgelivas/GitHub/breakout_0.1.1/src/com/company/sounds/youWin.wav"));
+    }
+
+    public static void gameOver() {
+        play(new File("/Users/georgelivas/GitHub/breakout_0.1.1/src/com/company/sounds/gameOver.wav"));
+    }
+
     public static void play(File sound) {
         try {
             Clip clip = AudioSystem.getClip();
