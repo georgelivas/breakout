@@ -15,7 +15,7 @@ public class Main {
         Debug.trace("BreakOut");
         Debug.set( true );              // Set true to get debug info
 
-        Model model = new Model(W, H, 2);   // model of the Game
+        Model model = new Model(W, H, 1);   // model of the Game
         View  view  = new View(W,H);    // View of the Game
         new Controller( model, view );
 
@@ -23,6 +23,7 @@ public class Main {
         model.addObserver(view);       // Add observer to the model
 
         view.setVisible(true);           // Make visible
+        // model.showMenu();
         model.startGame();        // Start playing the game
     }
 }

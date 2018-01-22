@@ -31,6 +31,12 @@ public class Controller {
             case -KeyEvent.VK_RIGHT:       // Right arrow
                 model.moveBat(+5);
                 break;
+            case 'a' :        // Left Arrow
+                model.moveBat(-5);
+                break;
+            case 'd' :       // Right arrow
+                model.moveBat(+5);
+                break;
             case 'f' :
                 // Very fast ball movement now
                 model.setFast(true);
