@@ -2,12 +2,20 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.Math.*;
 
 public class Levels {
     private static float BRICK_WIDTH = 50;    // Brick size
     private static float BRICK_HEIGHT = 30;
+
+    private static Colour[] colors = {Colour.YELLOW, Colour.GREEN, Colour.BLUE, Colour.PURPLE};
+
+    public static void pickColor() {
+        System.out.println(Math.random());
+    }
     
     public static List<GameObj> level1() {
+        pickColor();
         List<GameObj> bricks = new ArrayList<>();
         int dist = 50;
         // first 2 columns
@@ -281,7 +289,7 @@ public class Levels {
         dist +=31;
         // empty
         dist +=31;
-        bricks.add(new GameObj(228, dist, BRICK_WIDTH, BRICK_HEIGHT, Colour.GREEN));
+        bricks.add(new GameObj(228, dist, BRICK_WIDTH, BRICK_HEIGHT, Colour.PURPLE));
         dist +=31;
         bricks.add(new GameObj(228, dist, BRICK_WIDTH, BRICK_HEIGHT, Colour.BLUE));
 
@@ -323,7 +331,7 @@ public class Levels {
         dist +=31;
         // empty
         dist +=31;
-        bricks.add(new GameObj(332, dist, BRICK_WIDTH, BRICK_HEIGHT, Colour.GREEN));
+        bricks.add(new GameObj(332, dist, BRICK_WIDTH, BRICK_HEIGHT, Colour.PURPLE));
         dist +=31;
         bricks.add(new GameObj(332, dist, BRICK_WIDTH, BRICK_HEIGHT, Colour.BLUE));
 
@@ -392,7 +400,7 @@ public class Levels {
 
         dist = 50; // reset dist
 
-        // column 10
+        // column 11
         bricks.add(new GameObj(540, dist, BRICK_WIDTH, BRICK_HEIGHT, Colour.WHITE));
         dist +=31;
         bricks.add(new GameObj(540, dist, BRICK_WIDTH, BRICK_HEIGHT, Colour.WHITE));
