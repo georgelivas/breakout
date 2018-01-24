@@ -58,7 +58,7 @@ public class View extends JFrame implements Observer {
             g.setPaint(Color.BLACK);
             g.fill(new Rectangle2D.Float( 0, 0, width, height));
 
-            Font font = new Font("Monospaced",Font.BOLD,24);
+            Font font = new Font("Bell MT",Font.BOLD,24);
             g.setFont( font );
 
             displayBall(g, ball);   // Display the Ball
@@ -76,7 +76,7 @@ public class View extends JFrame implements Observer {
             // ************************************************************
 
             // Display state of game
-            g.setPaint(Color.WHITE);
+            g.setPaint(Color.ORANGE);
             FontMetrics fm = getFontMetrics(font);
             String fmt = "Score: %6d fps=%5.1f";
             String text = String.format(fmt, score,
@@ -95,7 +95,7 @@ public class View extends JFrame implements Observer {
 
             g.setPaint(Color.RED);
             FontMetrics fm1 = getFontMetrics(font);
-            g.drawString(lives,width-50,height-5);
+            g.drawString(lives,width-80,height-5);
         }
     }
 

@@ -21,7 +21,7 @@ public enum Colour {
 
     private final Color c;
 
-    Colour( Color c ) {
+    Colour(Color c) {
         this.c = c;
     }
 

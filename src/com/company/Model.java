@@ -1,6 +1,5 @@
 package com.company;
 
-import java.awt.*;
 import java.util.List;
 import java.util.Observable;
 
@@ -158,7 +157,7 @@ public class Model extends Observable {
         public void stop() {
             runGame = false;
         }
-        public int speed;
+        private int speed;
 
         public void setSpeed(int speed) {
             this.speed = speed;
