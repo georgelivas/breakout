@@ -24,7 +24,7 @@ public class Controller {
     public void userKeyInteraction(int keyCode ) {
         // Key typed includes specials, -ve
         // Char is ASCII value
-        switch ( keyCode ) {           // Character is
+        switch (keyCode) {           // Character is
             case -KeyEvent.VK_LEFT:        // Left Arrow
                 model.moveBat(-5);
                 break;
@@ -45,6 +45,14 @@ public class Controller {
                 // Normal speed
                 model.setFast(false);
                 break;
+            case -KeyEvent.VK_UP:
+                model.moveMenuItem("up");
+                break;
+            case -KeyEvent.VK_DOWN:
+                model.moveMenuItem("down");
+                break;
+            case -KeyEvent.VK_ENTER:
+                model.startGame = true;
             default :
                 Debug.trace( "Ch typed = %3d [%c]", keyCode, (char) keyCode );
         }

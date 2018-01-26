@@ -1,24 +1,23 @@
 package com.company;
 
-/**
- * Start the game
- *  The call to startGame() in the model starts 
- *    the actual play of the game
- *  Note: Many issues of mutual exclusion on shared variables
- *        are ignored.
- */
+import java.util.Scanner;
+
 public class Main {
     public static final int H = 800; // Height of window
     public static final int W = 600; // Width of window
 
     public static void main( String args[] ) {
+//        System.out.println("input level");
+//        Scanner sc = new Scanner(System.in);
+//        int level = sc.nextInt();
+//        play(level);
+
         Debug.trace("BreakOut");
         Debug.set( true );              // Set true to get debug info
 
-        Model model = new Model(W, H, 2);   // model of the Game
+        Model model = new Model(W, H);   // model of the Game
         View  view  = new View(W,H);    // View of the Game
         new Controller( model, view );
-
         model.createGameObjects();       // Ball, Bat & Bricks
         model.addObserver(view);       // Add observer to the model
 

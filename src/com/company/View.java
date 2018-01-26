@@ -1,5 +1,6 @@
 package com.company;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -7,6 +8,10 @@ import java.awt.event.KeyListener;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -24,6 +29,8 @@ public class View extends JFrame implements Observer {
     private int score =  0;           // The score
     private int frames = 0;           // Frames output
     private int lives = 0;
+    private GameObj menuItem1;
+    private boolean startGame;
 
 
     public final int width;   // Size of screen Width
@@ -58,44 +65,76 @@ public class View extends JFrame implements Observer {
             g.setPaint(Color.BLACK);
             g.fill(new Rectangle2D.Float( 0, 0, width, height));
 
-            Font font = new Font("Bell MT",Font.BOLD,24);
-            g.setFont( font );
+            Font font = new Font("Bell MT", Font.BOLD,24);
+            g.setFont(font);
 
-            displayBall(g, ball);   // Display the Ball
-            displayGameObj(g, bat);   // Display the Bat
-            // Display the bricks
-            for (int i = 0; i < bricks.size(); i++) {
-                if (bricks.get(i).isVisible()) {
-                    displayGameObj(g, bricks.get(i));
+            if (startGame) {
+                displayBall(g, ball);   // Display the Ball
+                displayGameObj(g, bat);   // Display the Bat
+
+                // Display the bricks 4
+                for (int i = 0; i < bricks.size(); i++) {
+                    if (bricks.get(i).isVisible()) {
+                        displayGameObj(g, bricks.get(i));
+                    }
                 }
+
+                g.setPaint(Color.ORANGE);
+                FontMetrics fm = getFontMetrics(font);
+                String fmt = "Score: %6d fps=%5.1f";
+                String text = String.format(fmt, score,
+                        frames / (Timer.timeTaken() / 1000.0)
+                );
+
+                if (frames > RESET_AFTER) {
+                    frames = 0;
+                    Timer.startTimer();
+                }
+                g.drawString(text, 10, height - 5);
+
+                String lives = "";
+                for (int i = 0; i < this.lives; i++) {
+                    lives += "♥";
+                }
+
+                g.setPaint(Color.RED);
+                FontMetrics fm1 = getFontMetrics(font);
+                g.drawString(lives, width - 80, height - 5);
+            } else {
+               // BufferedImage img = new BufferedImage();
+
+                //g.drawImage(img, 300, 400);
+                BufferedImage image;
+                try {
+                    image = ImageIO.read(new File("src/logo.png"));
+                    g.drawImage(image, 30, 60, this);
+                } catch (IOException e) {
+                    System.out.println(e);
+                }
+
+
+
+                displayGameObj(g, menuItem1);
+                g.setPaint(Color.WHITE);
+                FontMetrics fm1 = getFontMetrics(font);
+                g.drawString("LEVEL 1", 600/2-60, 800/2-100);
+                g.drawString("LEVEL 2", 600/2-60, 800/2+50);
+
+                g.setPaint(Color.GRAY);
+                Font smallFont = new Font("Bell MT", Font.BOLD,16);
+                g.setFont(smallFont);
+                g.drawString("HIT ENTER TO", 20, 800/2+220);
+
+
+                Color color1 = Color.YELLOW;
+                Color color2 = Color.BLUE;
+
+                GradientPaint gp = new GradientPaint(0, 40, color1, 0, 40, color2);
+                g.setPaint(gp);
+                Font bigFont = new Font("Bell MT", Font.BOLD,200);
+                g.setFont(bigFont);
+                g.drawString("PLAY!", 0, 800-30);
             }
-            // *[4]****************************************************[4]*
-            // * Display the bricks that make up the game                 *
-            // * Fill in code to display bricks                           *
-            // * Remember only a visible brick is to be displayed         *
-            // ************************************************************
-
-            // Display state of game
-            g.setPaint(Color.ORANGE);
-            FontMetrics fm = getFontMetrics(font);
-            String fmt = "Score: %6d fps=%5.1f";
-            String text = String.format(fmt, score,
-                    frames/(Timer.timeTaken()/1000.0)
-            );
-
-            if (frames > RESET_AFTER ) {
-                frames = 0; Timer.startTimer();
-            }
-            g.drawString(text,10,height-5);
-
-            String lives = "";
-            for(int i = 0; i < this.lives; i++) {
-                lives += "♥";
-            }
-
-            g.setPaint(Color.RED);
-            FontMetrics fm1 = getFontMetrics(font);
-            g.drawString(lives,width-80,height-5);
         }
     }
 
@@ -121,11 +160,18 @@ public class View extends JFrame implements Observer {
         );
     }
 
-    /**
-     * Called indirectly from the model when its state has changed
-     * @param aModel Model to be displayed
-     * @param arg    Any arguments (Not used)
-     */
+    private void displayLogo() {
+        String IMG_PATH = "src/logo.png";
+        try {
+            BufferedImage img = ImageIO.read(new File(IMG_PATH));
+            ImageIcon icon = new ImageIcon(img);
+            JLabel label = new JLabel(icon);
+            JOptionPane.showMessageDialog(null, label);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void update( Observable aModel, Object arg ) {
         Model model = (Model) aModel;
@@ -136,6 +182,8 @@ public class View extends JFrame implements Observer {
         score = model.getScore();                // Score
         lives = model.getLives();
         // Debug.trace("Update");
+        menuItem1 = model.getMenuItem1();
+        startGame = model.startGame;
         repaint();                               // Re draw game
     }
 

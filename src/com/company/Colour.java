@@ -10,13 +10,14 @@ import java.awt.*;
 public enum Colour {
     YELLOW(Color.decode("#FBCB2F")),
     GREEN(Color.decode("#20CE28")),
+    DARK_GREEN(Color.decode("#289934")),
     RED(Color.decode("#F00F1A")),
     BLUE(Color.decode("#1C99F9")),
     PURPLE(Color.decode("#9E3EFA")),
-    WHITE(Color.WHITE),
+    ORANGE(Color.decode("#FBBA38")),
     SILVER(Color.decode("#C0C0C0")),
     BLACK(Color.black),
-    ORANGE(Color.decode("#FBBA38")),
+    WHITE(Color.WHITE),
     GRAY(Color.GRAY);
 
     private final Color c;

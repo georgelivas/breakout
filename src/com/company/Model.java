@@ -3,10 +3,6 @@ package com.company;
 import java.util.List;
 import java.util.Observable;
 
-/**
- * Model of the game of breakout
- */
-
 public class Model extends Observable {
     // Boarder
     private static final int B = 6;                 // Border offset
@@ -27,6 +23,8 @@ public class Model extends Observable {
     private List<GameObj> bricks;                   // The bricks
     private GameObj bat;                            // The bat
 
+    private GameObj menuItem1;
+
     private boolean runGame = true;                 // Game running
     private boolean fast = false;                   // Sleep in run loop
 
@@ -34,37 +32,31 @@ public class Model extends Observable {
 
     private final float W;                          // Width of area
     private final float H;                          // Height of area
-    private final int level;
+    public int level;
     private int lives = 3;
+    public boolean startGame = false;
     private static boolean gameOver = false;
 
-    public Model(int width, int height, int level) {
+    public Model(int width, int height) {
         this.W = width;
         this.H = height;
-        this.level = level;
     }
-
-    /**
-     * Create in the model the objects that form the game
-     */
 
     public void createGameObjects() {
         synchronized(Model.class) {
-            ball   = new GameObj(W/2, H/2, BALL_SIZE, BALL_SIZE, Colour.SILVER);
-            bat    = new GameObj(W/2, H - (BRICK_HEIGHT*1.5f), (BRICK_WIDTH*3)/level,
-                    BRICK_HEIGHT/4, Colour.WHITE);
+            menuItem1 = new GameObj(W / 2 - 110, H / 2 - 145, 200, 70, Colour.DARK_GREEN);
+            level = menuItem1.getY() == H/2-195 ? 1 : 2;
+            //if (startGame) {
+            ball = new GameObj(W / 2, H / 2, BALL_SIZE, BALL_SIZE, Colour.SILVER);
+            bat = new GameObj(W / 2, H - (BRICK_HEIGHT * 1.5f), (BRICK_WIDTH * 3) / level,
+                    BRICK_HEIGHT / 4, Colour.WHITE);
             bricks = level == 1 ? Levels.level1() : Levels.level2();
-            // *[1]******************************************************[1]*
-            // * Fill in code to place the bricks on the board              *
-            // **************************************************************
+            //}
         }
     }
 
     private ActivePart active = null;
 
-    /**
-     * Start the continuous updates to the game
-     */
     public void startGame() {
         synchronized (Model.class) {
             stopGame();
@@ -76,13 +68,9 @@ public class Model extends Observable {
         }
     }
 
-    /**
-     * Stop the continuous updates to the game
-     * Will freeze the game, and let the thread die.
-     */
     public void stopGame() {
-        synchronized ( Model.class ) {
-            if ( active != null ) {
+        synchronized (Model.class) {
+            if (active != null) {
                 active.stop();
                 active = null;
             }
@@ -101,12 +89,12 @@ public class Model extends Observable {
         return bricks;
     }
 
-    /**
-     * Add to score n units
-     * @param n units to add to score
-     */
     protected void addToScore(int n) {
         score += n;
+    }
+
+    public GameObj getMenuItem1() {
+        return menuItem1;
     }
 
     public int getScore() {
@@ -117,22 +105,11 @@ public class Model extends Observable {
         return this.lives;
     }
 
-    /**
-     * Set speed of ball to be fast (true/ false)
-     * @param fast Set to true if require fast moving ball
-     */
     public void setFast(boolean fast) {
         this.fast = fast;
     }
 
-    /**
-     * Move the bat. (-1) is left or (+1) is right
-     * @param direction - The direction to move
-     */
     public void moveBat(int direction) {
-        // *[2]******************************************************[2]*
-        // * Fill in code to prevent the bat being moved off the screen *
-        // **************************************************************
         if (level == 2) {
             if (bat.getX() < 500 && direction > 0 || bat.getX() >= 40 && direction < 0) {
                 float dist = direction * BAT_MOVE * level;    // Actual distance to move
@@ -148,10 +125,10 @@ public class Model extends Observable {
         }
     }
 
-    /**
-     * This method is run in a separate thread
-     * Consequence: Potential concurrent access to shared variables in the class
-     */
+    public void moveMenuItem(String direction) {
+        menuItem1.setTopY(direction.equals("up") ? H/2-145 : H/2+5);
+    }
+
     class ActivePart {
         private boolean runGame = true;
         public void stop() {
@@ -232,7 +209,7 @@ public class Model extends Observable {
                                 }
                             }
                             int brokenBricks = 0;
-                            for (int j = 0; j <bricks.size(); j++) {
+                            for (int j = 0; j < bricks.size(); j++) {
                                 if (!bricks.get(j).isVisible()) {
                                     brokenBricks++;
                                 }
@@ -286,9 +263,11 @@ public class Model extends Observable {
                     }
 
                     modelChanged(); // Model changed refresh screen
-                    Thread.sleep(fast ? 2 : 20);
-                    ball.moveX(S);
-                    ball.moveY(S);
+                    if (startGame) {
+                        Thread.sleep(fast ? 2 : 20);
+                        ball.moveX(S);
+                        ball.moveY(S);
+                    }
                 }
             } catch (Exception e) {
                 Debug.error("Model.runAsSeparateThread - Error\n%s", e.getMessage());
@@ -296,10 +275,6 @@ public class Model extends Observable {
         }
     }
 
-    /**
-     * Model has changed so notify observers so that they
-     *  can redraw the current state of the game
-     */
     public void modelChanged() {
         setChanged();
         notifyObservers();
