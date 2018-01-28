@@ -25,7 +25,6 @@ public class Model extends Observable {
 
     private GameObj menuItem1;
 
-    private boolean runGame = true;                 // Game running
     private boolean fast = false;                   // Sleep in run loop
 
     private int score = 0;

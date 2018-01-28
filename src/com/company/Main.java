@@ -13,7 +13,7 @@ public class Main {
 //        play(level);
 
         Debug.trace("BreakOut");
-        Debug.set( true );              // Set true to get debug info
+        Debug.set(true);              // Set true to get debug info
 
         Model model = new Model(W, H);   // model of the Game
         View  view  = new View(W,H);    // View of the Game

@@ -1,10 +1,5 @@
 package com.company;
 
-/**
- * Print information about the running program
- * @version 1.0
- */
-
 public class Debug {
     private static boolean debug = true;
 
