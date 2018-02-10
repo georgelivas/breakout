@@ -8,19 +8,12 @@ import java.awt.event.KeyListener;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-/**
- * Displays a graphical view of the game of breakout.
- *  Uses Graphics2D would need to be re-implemented for Android.
- * @author Mike Smith University of Brighton
- */
 public class View extends JFrame implements Observer {
     private Controller controller;
     private GameObj bat;              // The bat
@@ -36,11 +29,6 @@ public class View extends JFrame implements Observer {
     public final int width;   // Size of screen Width
     public final int height;  // Sizeof screen Height
 
-    /**
-     * Construct the view of the game
-     * @param width Width of the view pixels
-     * @param height Height of the view pixels
-     */
     public View(int width, int height) {
         this.width = width; this.height = height;
         setSize(width, height);                 // Size of window
@@ -49,16 +37,8 @@ public class View extends JFrame implements Observer {
         Timer.startTimer();
     }
 
-    /**
-     *  Code called to draw the current state of the game
-     *   Uses draw:       Draw a shape
-     *        fill:       Fill the shape
-     *        setPaint:   Colour used
-     *        drawString: Write string on display
-     *  @param g Graphics context to use
-     */
     public void drawActualPicture(Graphics2D g) {
-        final int  RESET_AFTER = 200; // Movements
+        final int RESET_AFTER = 200; // Movements
         frames++;
         synchronized(Model.class) { // Make thread safe
             // BLACK background
@@ -72,7 +52,6 @@ public class View extends JFrame implements Observer {
                 displayBall(g, ball);   // Display the Ball
                 displayGameObj(g, bat);   // Display the Bat
 
-                // Display the bricks 4
                 for (int i = 0; i < bricks.size(); i++) {
                     if (bricks.get(i).isVisible()) {
                         displayGameObj(g, bricks.get(i));
@@ -100,19 +79,39 @@ public class View extends JFrame implements Observer {
                 g.setPaint(Color.RED);
                 FontMetrics fm1 = getFontMetrics(font);
                 g.drawString(lives, width - 80, height - 5);
-            } else {
-               // BufferedImage img = new BufferedImage();
 
-                //g.drawImage(img, 300, 400);
+
+                g.setPaint(Color.GRAY);
+                FontMetrics fm2 = getFontMetrics(font);
+                Font smallFont = new Font("Bell MT", Font.BOLD,11);
+                g.setFont(smallFont);
+                g.drawString("\'v\' to change vol.", (width/2)+46, height - 12);
+
+                if (PlaySound.mute) {
+                    BufferedImage image;
+                    try {
+                        image = ImageIO.read(new File("src/com/company/images/mute.png"));
+                        g.drawImage(image, (width/2)+20, height-28, this);
+                    } catch (IOException e) {
+                        System.out.println(e);
+                    }
+                } else {
+                    BufferedImage image;
+                    try {
+                        image = ImageIO.read(new File("src/com/company/images/vol_on.png"));
+                        g.drawImage(image, (width/2)+20, height-28, this);
+                    } catch (IOException e) {
+                        System.out.println(e);
+                    }
+                }
+            } else {
                 BufferedImage image;
                 try {
-                    image = ImageIO.read(new File("src/logo.png"));
+                    image = ImageIO.read(new File("src/com/company/images/logo.png"));
                     g.drawImage(image, 30, 60, this);
                 } catch (IOException e) {
                     System.out.println(e);
                 }
-
-
 
                 displayGameObj(g, menuItem1);
                 g.setPaint(Color.WHITE);
@@ -175,31 +174,22 @@ public class View extends JFrame implements Observer {
     @Override
     public void update( Observable aModel, Object arg ) {
         Model model = (Model) aModel;
-        // Get from the model the ball, bat, bricks & score
         ball = model.getBall();                  // Ball
         bricks = model.getBricks();              // Bricks
         bat = model.getBat();                    // Bat
         score = model.getScore();                // Score
         lives = model.getLives();
-        // Debug.trace("Update");
         menuItem1 = model.getMenuItem1();
         startGame = model.startGame;
         repaint();                               // Re draw game
     }
 
-    /**
-     * Called by repaint to redraw the Model
-     * @param g    Graphics context
-     */
     @Override
     public void update(Graphics g) {        // Called by repaint
         drawPicture((Graphics2D) g);        // Draw Picture
     }
 
-    /**
-     * Called when window is first shown or damaged
-     * @param g    Graphics context
-     */
+
     @Override
     public void paint(Graphics g) {             // When 'Window' is first
                                                 // shown or damaged
@@ -209,10 +199,6 @@ public class View extends JFrame implements Observer {
     private BufferedImage theAI;              // Alternate Image
     private Graphics2D theAG;                 // Alternate Graphics
 
-    /**
-     * Double buffer graphics output to avoid flicker
-     * @param g The graphics context
-     */
     private void drawPicture( Graphics2D g ) {      // Double buffer
                                                     // to avoid flicker
         if (bricks == null) return;                 // Race condition
@@ -225,23 +211,14 @@ public class View extends JFrame implements Observer {
         g.drawImage(theAI, 0, 0, this );         //Display on screen
     }
 
-    /**
-     * Need to be told where the controller is
-     * @param aPongController The controller used
-     */
     public void setController(Controller aPongController) {
         controller = aPongController;
     }
 
-    /**
-     * Methods Called on a key press
-     *  calls the controller to process
-     */
     private class Transaction implements KeyListener { // When character typed
         @Override
         public void keyPressed(KeyEvent e) {     // Obey this method
-            // Make -ve so not confused with normal characters
-            controller.userKeyInteraction( -e.getKeyCode() );
+            controller.userKeyInteraction(-e.getKeyCode());
         }
 
         @Override
@@ -252,7 +229,7 @@ public class View extends JFrame implements Observer {
         @Override
         public void keyTyped(KeyEvent e) {
             // Send internal code for key
-            controller.userKeyInteraction( e.getKeyChar() );
+            controller.userKeyInteraction(e.getKeyChar());
         }
     }
 }

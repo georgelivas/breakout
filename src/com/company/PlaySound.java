@@ -13,30 +13,42 @@ class PlaySound {
     private static File youWin = new File("src/com/company/sounds/youWin.wav");
     private static File gameOver = new File("src/com/company/sounds/gameOver.wav");
 
-    public static void smash() {
-        play(smash);
+    public static boolean mute = false;
 
+    public static void smash() {
+        if (!mute) {
+            play(smash);
+        }
     }
 
     public static void bat() {
-       play(bat);
-
+        if (!mute) {
+            play(bat);
+        }
     }
 
     public static void wallBeep() {
-        play(wallBeep);
+        if (!mute) {
+            play(wallBeep);
+        }
     }
 
     public static void bottomBeep() {
-        play(bottomBeep);
+        if (!mute) {
+            play(bottomBeep);
+        }
     }
 
     public static void youWin() {
-        play(youWin);
+        if (!mute) {
+            play(youWin);
+        }
     }
 
     public static void gameOver() {
-        play(gameOver);
+        if (!mute) {
+            play(gameOver);
+        }
     }
 
     private static void play(File sound) {

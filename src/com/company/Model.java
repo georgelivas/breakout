@@ -41,16 +41,14 @@ public class Model extends Observable {
         this.H = height;
     }
 
-    public void createGameObjects() {
+    public void createGameObjects(int level) {
         synchronized(Model.class) {
             menuItem1 = new GameObj(W / 2 - 110, H / 2 - 145, 200, 70, Colour.DARK_GREEN);
-            level = menuItem1.getY() == H/2-195 ? 1 : 2;
-            //if (startGame) {
             ball = new GameObj(W / 2, H / 2, BALL_SIZE, BALL_SIZE, Colour.SILVER);
             bat = new GameObj(W / 2, H - (BRICK_HEIGHT * 1.5f), (BRICK_WIDTH * 3) / level,
                     BRICK_HEIGHT / 4, Colour.WHITE);
             bricks = level == 1 ? Levels.level1() : Levels.level2();
-            //}
+
         }
     }
 
@@ -62,7 +60,7 @@ public class Model extends Observable {
             active = new ActivePart();
             active.setSpeed(level == 1 ? 4 : 5);
             Thread t = new Thread(active::runAsSeparateThread);
-            t.setDaemon(true);   // So may die when program exits
+            t.setDaemon(true);
             t.start();
         }
     }
@@ -153,7 +151,6 @@ public class Model extends Observable {
                     synchronized (Model.class) { // Make thread safe
                         float x = ball.getX();  // Current x,y position
                         float y = ball.getY();
-                        // Deal with possible edge of board hit
 
                         if (x >= W - B - BALL_SIZE) {
                             PlaySound.wallBeep();
@@ -179,11 +176,6 @@ public class Model extends Observable {
                         }
 
                         boolean hit = false;
-
-                        // *[3]******************************************************[3]*
-                        // * Fill in code to check if a visible brick has been hit      *
-                        // *      The ball has no effect on an invisible brick          *
-                        // **************************************************************
 
                         for (int i = 0; i < bricks.size(); i++) {
                             if (level == 1) {
