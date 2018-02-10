@@ -172,7 +172,7 @@ public class View extends JFrame implements Observer {
     }
 
     @Override
-    public void update( Observable aModel, Object arg ) {
+    public void update(Observable aModel, Object arg) {
         Model model = (Model) aModel;
         ball = model.getBall();                  // Ball
         bricks = model.getBricks();              // Bricks

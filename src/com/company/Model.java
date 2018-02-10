@@ -43,6 +43,7 @@ public class Model extends Observable {
 
     public void createGameObjects(int level) {
         synchronized(Model.class) {
+            this.level = level;
             menuItem1 = new GameObj(W / 2 - 110, H / 2 - 145, 200, 70, Colour.DARK_GREEN);
             ball = new GameObj(W / 2, H / 2, BALL_SIZE, BALL_SIZE, Colour.SILVER);
             bat = new GameObj(W / 2, H - (BRICK_HEIGHT * 1.5f), (BRICK_WIDTH * 3) / level,
