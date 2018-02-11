@@ -4,25 +4,21 @@ import java.util.List;
 import java.util.Observable;
 
 public class Model extends Observable {
-    // Boarder
     private static final int B = 6;                 // Border offset
     private static final int M = 40;                // Menu offset
 
-    // Size of things
     private static final float BALL_SIZE = 20;      // Ball side
     private static final float BRICK_WIDTH = 50;    // Brick size
     private static final float BRICK_HEIGHT = 30;
 
     private static final int BAT_MOVE = 5;          // Distance to move bat
 
-    // Scores
     private static final int HIT_BRICK = 50;        // Score
     private static final int HIT_BOTTOM = -200;     // Score
 
     private GameObj ball;                           // The ball
     private List<GameObj> bricks;                   // The bricks
     private GameObj bat;                            // The bat
-
     private GameObj menuItem1;
 
     private boolean fast = false;                   // Sleep in run loop
@@ -31,10 +27,14 @@ public class Model extends Observable {
 
     private final float W;                          // Width of area
     private final float H;                          // Height of area
-    public int level;
+
+    private int level;
     private int lives = 3;
     public boolean startGame = false;
     private static boolean gameOver = false;
+
+    private boolean youWin;
+    private boolean youLose;
 
     public Model(int width, int height) {
         this.W = width;
@@ -107,11 +107,20 @@ public class Model extends Observable {
         this.fast = fast;
     }
 
+    public boolean getYouWin() {
+        return youWin;
+    }
+
+    public boolean getYouLose() {
+        return youLose;
+    }
+
     public void moveBat(int direction) {
         if (level == 2) {
-            if (bat.getX() < 500 && direction > 0 || bat.getX() >= 40 && direction < 0) {
+            if (bat.getX() <= 500 && direction > 0 || bat.getX() >= 40 && direction < 0) {
                 float dist = direction * BAT_MOVE * level;    // Actual distance to move
                 Debug.trace("Model: Move bat = %6.2f", dist);
+                System.out.println(bat.getX());
                 bat.moveX(dist);
             }
         } else {
@@ -209,6 +218,7 @@ public class Model extends Observable {
 
                             if (brokenBricks == bricks.size()) {
                                 gameOver = true;
+                                youWin = true;
                                 PlaySound.youWin();
                             }
                         }
@@ -222,8 +232,13 @@ public class Model extends Observable {
                             PlaySound.bat();
                         }
 
+                        if (score < 1500) {
+                            this.setSpeed(5);
+                        }
+
                         if (lives == 0) {
                             gameOver = true;
+                            youLose = true;
                             PlaySound.gameOver();
                         }
 

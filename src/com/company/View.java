@@ -24,7 +24,8 @@ public class View extends JFrame implements Observer {
     private int lives = 0;
     private GameObj menuItem1;
     private boolean startGame;
-
+    private boolean youWin;
+    private boolean youLose;
 
     public final int width;   // Size of screen Width
     public final int height;  // Sizeof screen Height
@@ -40,7 +41,7 @@ public class View extends JFrame implements Observer {
     public void drawActualPicture(Graphics2D g) {
         final int RESET_AFTER = 200; // Movements
         frames++;
-        synchronized(Model.class) { // Make thread safe
+        synchronized(Model.class) {
             // BLACK background
             g.setPaint(Color.BLACK);
             g.fill(new Rectangle2D.Float( 0, 0, width, height));
@@ -49,12 +50,19 @@ public class View extends JFrame implements Observer {
             g.setFont(font);
 
             if (startGame) {
-                displayBall(g, ball);   // Display the Ball
-                displayGameObj(g, bat);   // Display the Bat
+                displayBall(g, ball);
+                displayGameObj(g, bat);
 
-                for (int i = 0; i < bricks.size(); i++) {
-                    if (bricks.get(i).isVisible()) {
-                        displayGameObj(g, bricks.get(i));
+//                for (int i = 0; i < bricks.size(); i++) {
+//                    if (bricks.get(i).isVisible()) {
+//                        displayGameObj(g, bricks.get(i));
+//                    }
+//                }
+                
+                // Display bricks
+                for (GameObj brick : bricks){
+                    if (brick.isVisible()) {
+                        displayGameObj(g, brick);
                     }
                 }
 
@@ -64,7 +72,6 @@ public class View extends JFrame implements Observer {
                 String text = String.format(fmt, score,
                         frames / (Timer.timeTaken() / 1000.0)
                 );
-
                 if (frames > RESET_AFTER) {
                     frames = 0;
                     Timer.startTimer();
@@ -75,11 +82,9 @@ public class View extends JFrame implements Observer {
                 for (int i = 0; i < this.lives; i++) {
                     lives += "♥";
                 }
-
                 g.setPaint(Color.RED);
                 FontMetrics fm1 = getFontMetrics(font);
                 g.drawString(lives, width - 80, height - 5);
-
 
                 g.setPaint(Color.GRAY);
                 FontMetrics fm2 = getFontMetrics(font);
@@ -104,7 +109,27 @@ public class View extends JFrame implements Observer {
                         System.out.println(e);
                     }
                 }
-            } else {
+
+                if (youLose) {
+                    BufferedImage image;
+                    try {
+                        image = ImageIO.read(new File("src/com/company/images/you_lose.png"));
+                        g.drawImage(image, 25, 330, this);
+                    } catch (IOException e) {
+                        System.out.println(e);
+                    }
+                }
+
+                if (youWin) {
+                    BufferedImage image;
+                    try {
+                        image = ImageIO.read(new File("src/com/company/images/you_win.png"));
+                        g.drawImage(image, 30, 30, this);
+                    } catch (IOException e) {
+                        System.out.println(e);
+                    }
+                }
+            } else {        // Display menu
                 BufferedImage image;
                 try {
                     image = ImageIO.read(new File("src/com/company/images/logo.png"));
@@ -123,7 +148,6 @@ public class View extends JFrame implements Observer {
                 Font smallFont = new Font("Bell MT", Font.BOLD,16);
                 g.setFont(smallFont);
                 g.drawString("HIT ENTER TO", 20, 800/2+220);
-
 
                 Color color1 = Color.YELLOW;
                 Color color2 = Color.BLUE;
@@ -144,7 +168,8 @@ public class View extends JFrame implements Observer {
                     go.getX(),
                     go.getY(),
                     go.getWidth(),
-                    go.getHeight() )
+                    go.getHeight()
+                )
         );
     }
 
@@ -155,20 +180,9 @@ public class View extends JFrame implements Observer {
                         go.getX(),
                         go.getY(),
                         go.getWidth(),
-                        go.getHeight() )
+                        go.getHeight()
+                )
         );
-    }
-
-    private void displayLogo() {
-        String IMG_PATH = "src/logo.png";
-        try {
-            BufferedImage img = ImageIO.read(new File(IMG_PATH));
-            ImageIcon icon = new ImageIcon(img);
-            JLabel label = new JLabel(icon);
-            JOptionPane.showMessageDialog(null, label);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -180,6 +194,8 @@ public class View extends JFrame implements Observer {
         score = model.getScore();                // Score
         lives = model.getLives();
         menuItem1 = model.getMenuItem1();
+        youWin = model.getYouWin();
+        youLose = model.getYouLose();
         startGame = model.startGame;
         repaint();                               // Re draw game
     }
@@ -192,7 +208,6 @@ public class View extends JFrame implements Observer {
 
     @Override
     public void paint(Graphics g) {             // When 'Window' is first
-                                                // shown or damaged
         drawPicture((Graphics2D) g);            // Draw Picture
     }
 

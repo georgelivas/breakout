@@ -3,29 +3,27 @@ package com.company;
 import java.awt.event.KeyEvent;
 
 public class Controller {
-    private Model model;   // Model of game
-    private View view;    // View of game
+    private Model model;
+    private View view;
 
     public Controller(Model aBreakOutModel, View aBreakOutView ) {
         model = aBreakOutModel;
         view = aBreakOutView;
-        view.setController(this);    // View could talk to controller
+        view.setController(this);
     }
 
     public void userKeyInteraction(int keyCode ) {
-        // Key typed includes specials, -ve
-        // Char is ASCII value
-        switch (keyCode) {           // Character is
+        switch (keyCode) {
             case -KeyEvent.VK_LEFT:        // Left Arrow
                 model.moveBat(-5);
                 break;
             case -KeyEvent.VK_RIGHT:       // Right arrow
                 model.moveBat(+5);
                 break;
-            case 'a' :        // Left Arrow
+            case 'a' :                      // Left Arrow
                 model.moveBat(-5);
                 break;
-            case 'd' :       // Right arrow
+            case 'd' :                      // Right arrow
                 model.moveBat(+5);
                 break;
             case 'f' :
