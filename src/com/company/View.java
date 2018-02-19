@@ -39,7 +39,6 @@ public class View extends JFrame implements Observer {
     }
 
     public void drawActualPicture(Graphics2D g) {
-        final int RESET_AFTER = 200; // Movements
         frames++;
         synchronized(Model.class) {
             // BLACK background
@@ -52,12 +51,6 @@ public class View extends JFrame implements Observer {
             if (startGame) {
                 displayBall(g, ball);
                 displayGameObj(g, bat);
-
-//                for (int i = 0; i < bricks.size(); i++) {
-//                    if (bricks.get(i).isVisible()) {
-//                        displayGameObj(g, bricks.get(i));
-//                    }
-//                }
                 
                 // Display bricks
                 for (GameObj brick : bricks){
@@ -72,10 +65,10 @@ public class View extends JFrame implements Observer {
                 String text = String.format(fmt, score,
                         frames / (Timer.timeTaken() / 1000.0)
                 );
-                if (frames > RESET_AFTER) {
-                    frames = 0;
-                    Timer.startTimer();
-                }
+
+                frames = 0;
+                Timer.startTimer();
+
                 g.drawString(text, 10, height - 5);
 
                 String lives = "";

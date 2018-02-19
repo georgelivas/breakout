@@ -44,13 +44,16 @@ public class Controller {
                 model.moveMenuItem("down");
                 break;
             case -KeyEvent.VK_ENTER:
-                if (this.model.getMenuItem1().getY() == 800/2+5) {
+                if (!this.model.startGame && this.model.getMenuItem1().getY() == 800/2+5) {
                     this.model.createGameObjects(2);
-                } else {
+                    this.model.startGame = true;
+                    this.model.startGame();
+                } else if (!this.model.startGame) {
                     this.model.createGameObjects(1);
+                    this.model.startGame = true;
+                    this.model.startGame();
                 }
-                this.model.startGame = true;
-                this.model.startGame();
+
             default :
                 Debug.trace("Ch typed = %3d [%c]", keyCode, (char) keyCode);
         }
