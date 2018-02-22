@@ -31,7 +31,7 @@ public class Model extends Observable {
     private int level;
     private int lives = 3;
     public boolean startGame = false;
-    private static boolean gameOver = false;
+    public static boolean gameOver = false;
 
     private boolean youWin;
     private boolean youLose;
@@ -75,6 +75,16 @@ public class Model extends Observable {
         }
     }
 
+    public void reset() {
+        startGame = false;
+        gameOver = false;
+        youLose = false;
+        youWin = false;
+        lives = 3;
+        createGameObjects(1);
+        startGame();
+    }
+
     public GameObj getBat() {
         return bat;
     }
@@ -113,6 +123,10 @@ public class Model extends Observable {
 
     public boolean getYouLose() {
         return youLose;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 
     public void moveBat(int direction) {
