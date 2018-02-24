@@ -20,6 +20,7 @@ public class Model extends Observable {
     private List<GameObj> bricks;                   // The bricks
     private GameObj bat;                            // The bat
     private GameObj menuItem1;
+    private PlaySound sound = new PlaySound();
 
     private boolean fast = false;                   // Sleep in run loop
 
@@ -32,6 +33,7 @@ public class Model extends Observable {
     private int lives = 3;
     public boolean startGame = false;
     public static boolean gameOver = false;
+    public static boolean mute = false;
 
     private boolean youWin;
     private boolean youLose;
@@ -163,6 +165,7 @@ public class Model extends Observable {
 
         public void runAsSeparateThread() {
             final float S = speed; // Units to move (Speed)
+
             boolean hitBottom = false;
             try {
                 synchronized (Model.class) {        // Make thread safe
@@ -176,18 +179,20 @@ public class Model extends Observable {
                         float x = ball.getX();  // Current x,y position
                         float y = ball.getY();
 
+                        sound.mute = mute;
+
                         if (x >= W - B - BALL_SIZE) {
-                            PlaySound.wallBeep();
+                            sound.wallBeep();
                             ball.changeDirectionX();
                         }
 
                         if (x <= B) {
-                            PlaySound.wallBeep();
+                            sound.wallBeep();
                             ball.changeDirectionX();
                         }
 
                         if (y >= H - B - BALL_SIZE - 30) {  // Bottom
-                            PlaySound.bottomBeep();
+                            sound.bottomBeep();
                             ball.changeDirectionY();
                             addToScore(HIT_BOTTOM);
                             lives--;
@@ -195,7 +200,7 @@ public class Model extends Observable {
                         }
 
                         if (y <= M) {
-                            PlaySound.wallBeep();
+                            sound.wallBeep();
                             ball.changeDirectionY();
                         }
 
@@ -205,7 +210,7 @@ public class Model extends Observable {
                             if (level == 1) {
                                 if (bricks.get(i).hitBy(ball) && bricks.get(i).isVisible()) {
                                     hit = true;
-                                    PlaySound.smash();
+                                    sound.smash();
                                     bricks.get(i).setVisibility(false);
                                     score += HIT_BRICK;
                                 }
@@ -213,11 +218,11 @@ public class Model extends Observable {
                                 if (bricks.get(i).hitBy(ball) && bricks.get(i).isVisible()) {
                                     hit = true;
                                     if (bricks.get(i).getTimesHit() > 0) {
-                                        PlaySound.smash();
+                                        sound.smash();
                                         bricks.get(i).setVisibility(false);
                                         score += HIT_BRICK;
                                     } else {
-                                        PlaySound.smash();
+                                        sound.smash();
                                         bricks.get(i).increaseTimesHit();
                                         bricks.get(i).setColour(Colour.RED);
                                     }
@@ -233,7 +238,7 @@ public class Model extends Observable {
                             if (brokenBricks == bricks.size()) {
                                 gameOver = true;
                                 youWin = true;
-                                PlaySound.youWin();
+                                sound.youWin();
                             }
                         }
 
@@ -243,7 +248,7 @@ public class Model extends Observable {
 
                         if (ball.hitBy(bat)) {
                             ball.changeDirectionY();
-                            PlaySound.bat();
+                            sound.bat();
                         }
 
                         if (score < 1500) {
@@ -253,7 +258,7 @@ public class Model extends Observable {
                         if (lives == 0) {
                             gameOver = true;
                             youLose = true;
-                            PlaySound.gameOver();
+                            sound.gameOver();
                         }
 
                         if (gameOver) {

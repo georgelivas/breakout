@@ -39,7 +39,7 @@ public class Controller {
                 model.setFast(false);
                 break;
             case 'v' :
-                PlaySound.mute = !PlaySound.mute;
+                model.mute = !model.mute;
                 break;
             case -KeyEvent.VK_UP:
                 model.moveMenuItem("up");

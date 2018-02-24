@@ -2,61 +2,65 @@ package com.company;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import java.io.*;
 
 class PlaySound {
-    private static File smash = new File("/com/company/sounds/smash.wav");
-    private static File bat = new File("src/com/company/sounds/bat.wav");
-    private static File wallBeep = new File("src/com/company/sounds/beep.wav");
-    private static File bottomBeep = new File("src/com/company/sounds/bottomBeep.wav");
-    private static File youWin = new File("src/com/company/sounds/youWin.wav");
-    private static File gameOver = new File("src/com/company/sounds/gameOver.wav");
+    private String smash = "sounds/smash.wav";
+    private String bat = "sounds/bat.wav";
+    private String wallBeep = "sounds/beep.wav";
+    private String bottomBeep = "src/com/company/sounds/bottomBeep.wav";
+    private String youWin = "src/com/company/sounds/youWin.wav";
+    private String gameOver = "src/com/company/sounds/gameOver.wav";
 
-    public static boolean mute = false;
+    public boolean mute = false;
 
-    public static void smash() {
+    public PlaySound() {
+
+    }
+
+    public void smash() {
         if (!mute) {
             play(smash);
         }
     }
 
-    public static void bat() {
+    public void bat() {
         if (!mute) {
             play(bat);
         }
     }
 
-    public static void wallBeep() {
+    public void wallBeep() {
         if (!mute) {
             play(wallBeep);
         }
     }
 
-    public static void bottomBeep() {
+    public void bottomBeep() {
         if (!mute) {
             play(bottomBeep);
         }
     }
 
-    public static void youWin() {
+    public void youWin() {
         if (!mute) {
             play(youWin);
         }
     }
 
-    public static void gameOver() {
+    public void gameOver() {
         if (!mute) {
             play(gameOver);
         }
     }
 
-    private static void play(File sound) {
+    private void play(String sound) {
         try {
             Clip clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(sound));
+            clip.open(AudioSystem.getAudioInputStream(getClass().getResource(sound)));
             clip.start();
             Thread.sleep(clip.getMicrosecondLength()/100000);
         } catch (Exception e) {
+            System.out.println(e);
         }
     }
 

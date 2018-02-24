@@ -27,6 +27,8 @@ public class View extends JFrame implements Observer {
     private boolean youWin;
     private boolean youLose;
 
+    private boolean mute;
+
     public final int width;   // Size of screen Width
     public final int height;  // Sizeof screen Height
 
@@ -85,7 +87,7 @@ public class View extends JFrame implements Observer {
                 g.setFont(smallFont);
                 g.drawString("\'v\' to change vol.", (width/2)+46, height - 12);
 
-                if (PlaySound.mute) {
+                if (mute) {
                     BufferedImage image;
                     try {
                         image = ImageIO.read(getClass().getResourceAsStream("/com/company/images/mute.png")); // ImageIO.read(new File("src/com/company/images/mute.png"));
@@ -198,6 +200,7 @@ public class View extends JFrame implements Observer {
         youWin = model.getYouWin();
         youLose = model.getYouLose();
         startGame = model.startGame;
+        mute = model.mute;
         repaint();                               // Re draw game
     }
 
