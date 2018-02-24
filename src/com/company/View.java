@@ -108,6 +108,10 @@ public class View extends JFrame implements Observer {
                     try {
                         image = ImageIO.read(new File("src/com/company/images/you_lose.png"));
                         g.drawImage(image, 25, 330, this);
+
+                        g.setPaint(Color.WHITE);
+                        g.setFont(font);
+                        g.drawString("Press ENTER for Menu.", 35, 730);
                     } catch (IOException e) {
                         System.out.println(e);
                     }
@@ -118,6 +122,10 @@ public class View extends JFrame implements Observer {
                     try {
                         image = ImageIO.read(new File("src/com/company/images/you_win.png"));
                         g.drawImage(image, 30, 30, this);
+
+                        g.setPaint(Color.WHITE);
+                        g.setFont(font);
+                        g.drawString("Press ENTER for Menu.", 100, 480);
                     } catch (IOException e) {
                         System.out.println(e);
                     }

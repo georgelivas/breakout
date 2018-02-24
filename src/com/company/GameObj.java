@@ -45,7 +45,10 @@ public class GameObj {
 
     public float getWidth() {
         return width;
+    }
 
+    public float getHeight() {
+        return height;
     }
 
     public int getTimesHit() {
@@ -54,10 +57,6 @@ public class GameObj {
 
     public void increaseTimesHit() {
         this.timesHit++;
-    }
-
-    public float getHeight() {
-        return height;
     }
 
     public Colour getColour() {
