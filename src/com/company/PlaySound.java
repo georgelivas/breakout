@@ -1,12 +1,11 @@
 package com.company;
 
-
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.*;
 
 class PlaySound {
-    private static File smash = new File("src/com/company/sounds/smash.wav");
+    private static File smash = new File("/com/company/sounds/smash.wav");
     private static File bat = new File("src/com/company/sounds/bat.wav");
     private static File wallBeep = new File("src/com/company/sounds/beep.wav");
     private static File bottomBeep = new File("src/com/company/sounds/bottomBeep.wav");

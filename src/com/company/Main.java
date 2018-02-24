@@ -6,7 +6,7 @@ public class Main {
 
     public static void main( String args[] ) {
         Debug.trace("BreakOut");
-        Debug.set(true);                            // Set true to get debug info
+        Debug.set(false);                            // Set true to get debug info
 
         Model model = new Model(W, H);              // model of the Game
         View  view  = new View(W,H);                // View of the Game
@@ -15,7 +15,6 @@ public class Main {
         model.addObserver(view);                    // Add observer to the model
 
         view.setVisible(true);                      // Make visible
-        // model.showMenu();
         model.startGame();                          // Start playing the game
     }
 }

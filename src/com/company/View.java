@@ -88,7 +88,7 @@ public class View extends JFrame implements Observer {
                 if (PlaySound.mute) {
                     BufferedImage image;
                     try {
-                        image = ImageIO.read(new File("src/com/company/images/mute.png"));
+                        image = ImageIO.read(getClass().getResourceAsStream("/com/company/images/mute.png")); // ImageIO.read(new File("src/com/company/images/mute.png"));
                         g.drawImage(image, (width/2)+20, height-28, this);
                     } catch (IOException e) {
                         System.out.println(e);
@@ -96,7 +96,7 @@ public class View extends JFrame implements Observer {
                 } else {
                     BufferedImage image;
                     try {
-                        image = ImageIO.read(new File("src/com/company/images/vol_on.png"));
+                        image = ImageIO.read(getClass().getResourceAsStream("/com/company/images/vol_on.png")); // ImageIO.read(new File("src/com/company/images/vol_on.png"));
                         g.drawImage(image, (width/2)+20, height-28, this);
                     } catch (IOException e) {
                         System.out.println(e);
@@ -106,7 +106,7 @@ public class View extends JFrame implements Observer {
                 if (youLose) {
                     BufferedImage image;
                     try {
-                        image = ImageIO.read(new File("src/com/company/images/you_lose.png"));
+                        image = ImageIO.read(getClass().getResourceAsStream("/com/company/images/you_lose.png")); // ImageIO.read(new File("src/com/company/images/you_lose.png"));
                         g.drawImage(image, 25, 330, this);
 
                         g.setPaint(Color.WHITE);
@@ -120,7 +120,7 @@ public class View extends JFrame implements Observer {
                 if (youWin) {
                     BufferedImage image;
                     try {
-                        image = ImageIO.read(new File("src/com/company/images/you_win.png"));
+                        image = ImageIO.read(getClass().getResourceAsStream("/com/company/images/you_win.png")); // ImageIO.read(new File("src/com/company/images/you_win.png"));
                         g.drawImage(image, 30, 30, this);
 
                         g.setPaint(Color.WHITE);
@@ -133,7 +133,7 @@ public class View extends JFrame implements Observer {
             } else {        // Display menu
                 BufferedImage image;
                 try {
-                    image = ImageIO.read(new File("src/com/company/images/logo.png"));
+                    image = ImageIO.read(getClass().getResourceAsStream("/com/company/images/logo.png")); // ImageIO.read(new File("src/com/company/images/logo.png"));
                     g.drawImage(image, 30, 60, this);
                 } catch (IOException e) {
                     System.out.println(e);
