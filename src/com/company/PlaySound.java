@@ -7,9 +7,9 @@ class PlaySound {
     private String smash = "sounds/smash.wav";
     private String bat = "sounds/bat.wav";
     private String wallBeep = "sounds/beep.wav";
-    private String bottomBeep = "src/com/company/sounds/bottomBeep.wav";
-    private String youWin = "src/com/company/sounds/youWin.wav";
-    private String gameOver = "src/com/company/sounds/gameOver.wav";
+    private String bottomBeep = "sounds/bottomBeep.wav";
+    private String youWin = "sounds/youWin.wav";
+    private String gameOver = "sounds/gameOver.wav";
 
     public boolean mute = false;
 

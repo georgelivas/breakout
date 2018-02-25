@@ -11,21 +11,20 @@ public class Levels {
     private static Colour[] colors = {Colour.YELLOW, Colour.GREEN, Colour.BLUE, Colour.PURPLE};
 
     private static Colour pickColor() {
-        int selectedColorPos = new Random().nextInt(colors.length);
-        return colors[selectedColorPos];
+        return colors[new Random().nextInt(colors.length)];
     }
-    
+
     public static List<GameObj> level1() {
         pickColor();
         List<GameObj> bricks = new ArrayList<>();
 
-        for (int x = 20; x < 11 * 52 + 20; x += 52){
+        for (int x = 20; x < 592; x += 52){
             for (int y = 50; y < 329; y += 31) {
                 if (
-                        !((y == 143 && (x > 72) && (x < 9 * 52 + 20)) ||
-                        (y == 112 && (x > 72) && (x < 9 * 52 + 20)) ||
-                        (y == 112+62+31 && (x > 72) && (x < 9 * 52 + 20)) ||
-                        (y == 112+124 && (x > 72) && (x < 9 * 52 + 20)))
+                        !((y == 143 && (x > 72) && (x < 488)) ||
+                        (y == 112 && (x > 72) && (x < 488)) ||
+                        (y == 205 && (x > 72) && (x < 488)) ||
+                        (y == 236 && (x > 72) && (x < 488)))
                 ) {
                     bricks.add(new GameObj(x, y, BRICK_WIDTH, BRICK_HEIGHT, pickColor()));
                 }
