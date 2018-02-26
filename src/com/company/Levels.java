@@ -30,6 +30,18 @@ public class Levels {
                 }
             }
         }
+        for (int i = 0; i < 4; i++) {
+            int index = new Random().nextInt(bricks.size());
+            GameObj brick = bricks.get(index);
+            if (!brick.getPowerUp()) {
+                brick.setPowerUp(true);
+                bricks.add(index, brick);
+                System.out.println("adding powerup");
+            } else {
+                i--;
+                System.out.println("powerup exists");
+            }
+        }
         return bricks;
     }
 

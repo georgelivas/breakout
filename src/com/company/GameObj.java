@@ -10,6 +10,7 @@ public class GameObj {
     private int   dirX   = 1;    // Direction X (1 or -1)
     private int   dirY   = 1;    // Direction Y (1 or -1)
     private int timesHit = 0;
+    private boolean powerUp = false;
 
     public GameObj(float x, float y, float widthIs, float heightIs, Colour colour) {
       topX = x;
@@ -41,6 +42,14 @@ public class GameObj {
 
     public void setTopY(float topY) {
         this.topY = topY;
+    }
+
+    public boolean getPowerUp() {
+        return powerUp;
+    }
+
+    public void setPowerUp(boolean powerUp) {
+        this.powerUp = powerUp;
     }
 
     public float getWidth() {

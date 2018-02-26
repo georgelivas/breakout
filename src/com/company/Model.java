@@ -2,6 +2,7 @@ package com.company;
 
 import java.util.List;
 import java.util.Observable;
+import java.util.Random;
 
 public class Model extends Observable {
     private static final int B = 6;                 // Border offset
@@ -136,7 +137,6 @@ public class Model extends Observable {
             if (bat.getX() <= 500 && direction > 0 || bat.getX() >= 40 && direction < 0) {
                 float dist = direction * BAT_MOVE * level;    // Actual distance to move
                 Debug.trace("Model: Move bat = %6.2f", dist);
-                System.out.println(bat.getX());
                 bat.moveX(dist);
             }
         } else {
@@ -212,6 +212,10 @@ public class Model extends Observable {
                                     hit = true;
                                     sound.smash();
                                     bricks.get(i).setVisibility(false);
+                                    System.out.println(PowerUps.bSquared.apply(2));
+                                    if(bricks.get(i).getPowerUp()) {
+                                        System.out.println("powerup found");
+                                    }
                                     score += HIT_BRICK;
                                 }
                             } else {
@@ -221,6 +225,11 @@ public class Model extends Observable {
                                         sound.smash();
                                         bricks.get(i).setVisibility(false);
                                         score += HIT_BRICK;
+                                        System.out.println(PowerUps.bSquared.apply(2));
+                                        if (bricks.get(i).getPowerUp()) {
+                                            System.out.println("powerup found");
+                                            System.out.println(PowerUps.arrayOfFunctions[new Random().nextInt(PowerUps.arrayOfFunctions.length)].apply(2));
+                                        }
                                     } else {
                                         sound.smash();
                                         bricks.get(i).increaseTimesHit();
@@ -228,12 +237,8 @@ public class Model extends Observable {
                                     }
                                 }
                             }
-                            int brokenBricks = 0;
-                            for (int j = 0; j < bricks.size(); j++) {
-                                if (!bricks.get(j).isVisible()) {
-                                    brokenBricks++;
-                                }
-                            }
+
+                            int brokenBricks = bricks.stream().filter(elm -> !elm.isVisible()).toArray().length;
 
                             if (brokenBricks == bricks.size()) {
                                 gameOver = true;
