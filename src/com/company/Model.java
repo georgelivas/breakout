@@ -206,39 +206,45 @@ public class Model extends Observable {
 
                         boolean hit = false;
 
-                        for (int i = 0; i < bricks.size(); i++) {
+                        for (GameObj brick : bricks) {
                             if (level == 1) {
-                                if (bricks.get(i).hitBy(ball) && bricks.get(i).isVisible()) {
+                                if (brick.hitBy(ball) && brick.isVisible()) {
                                     hit = true;
                                     sound.smash();
-                                    bricks.get(i).setVisibility(false);
+                                    brick.setVisibility(false);
                                     System.out.println(PowerUps.bSquared.apply(2));
-                                    if(bricks.get(i).getPowerUp()) {
+                                    if(brick.getPowerUp()) {
                                         System.out.println("powerup found");
                                     }
                                     score += HIT_BRICK;
                                 }
                             } else {
-                                if (bricks.get(i).hitBy(ball) && bricks.get(i).isVisible()) {
+                                if (brick.hitBy(ball) && brick.isVisible()) {
                                     hit = true;
-                                    if (bricks.get(i).getTimesHit() > 0) {
+                                    if (brick.getTimesHit() > 0) {
                                         sound.smash();
-                                        bricks.get(i).setVisibility(false);
+                                        brick.setVisibility(false);
                                         score += HIT_BRICK;
                                         System.out.println(PowerUps.bSquared.apply(2));
-                                        if (bricks.get(i).getPowerUp()) {
+                                        if (brick.getPowerUp()) {
                                             System.out.println("powerup found");
-                                            System.out.println(PowerUps.arrayOfFunctions[new Random().nextInt(PowerUps.arrayOfFunctions.length)].apply(2));
+                                            System.out.println(
+                                                    PowerUps.arrayOfFunctions[
+                                                            new Random()
+                                                                    .nextInt(PowerUps
+                                                                            .arrayOfFunctions
+                                                                            .length)]
+                                                            .apply(2));
                                         }
                                     } else {
                                         sound.smash();
-                                        bricks.get(i).increaseTimesHit();
-                                        bricks.get(i).setColour(Colour.RED);
+                                        brick.increaseTimesHit();
+                                        brick.setColour(Colour.RED);
                                     }
                                 }
                             }
 
-                            int brokenBricks = bricks.stream().filter(elm -> !elm.isVisible()).toArray().length;
+                            int brokenBricks = (int)bricks.stream().filter(elm -> !elm.isVisible()).count();
 
                             if (brokenBricks == bricks.size()) {
                                 gameOver = true;

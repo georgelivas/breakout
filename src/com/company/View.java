@@ -8,7 +8,6 @@ import java.awt.event.KeyListener;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Observable;
@@ -53,13 +52,8 @@ public class View extends JFrame implements Observer {
             if (startGame) {
                 displayBall(g, ball);
                 displayGameObj(g, bat);
-                
-                // Display bricks
-                for (GameObj brick : bricks){
-                    if (brick.isVisible()) {
-                        displayGameObj(g, brick);
-                    }
-                }
+
+                bricks.stream().filter(GameObj::isVisible).forEach(brk -> displayGameObj(g, brk));
 
                 g.setPaint(Color.ORANGE);
                 FontMetrics fm = getFontMetrics(font);
@@ -90,7 +84,7 @@ public class View extends JFrame implements Observer {
                 if (mute) {
                     BufferedImage image;
                     try {
-                        image = ImageIO.read(getClass().getResourceAsStream("/com/company/images/mute.png")); // ImageIO.read(new File("src/com/company/images/mute.png"));
+                        image = ImageIO.read(getClass().getResourceAsStream("/com/company/images/mute.png"));
                         g.drawImage(image, (width/2)+20, height-28, this);
                     } catch (IOException e) {
                         System.out.println(e);
@@ -98,7 +92,7 @@ public class View extends JFrame implements Observer {
                 } else {
                     BufferedImage image;
                     try {
-                        image = ImageIO.read(getClass().getResourceAsStream("/com/company/images/vol_on.png")); // ImageIO.read(new File("src/com/company/images/vol_on.png"));
+                        image = ImageIO.read(getClass().getResourceAsStream("/com/company/images/vol_on.png"));
                         g.drawImage(image, (width/2)+20, height-28, this);
                     } catch (IOException e) {
                         System.out.println(e);
@@ -108,7 +102,7 @@ public class View extends JFrame implements Observer {
                 if (youLose) {
                     BufferedImage image;
                     try {
-                        image = ImageIO.read(getClass().getResourceAsStream("/com/company/images/you_lose.png")); // ImageIO.read(new File("src/com/company/images/you_lose.png"));
+                        image = ImageIO.read(getClass().getResourceAsStream("/com/company/images/you_lose.png"));
                         g.drawImage(image, 25, 330, this);
 
                         g.setPaint(Color.WHITE);
@@ -122,7 +116,7 @@ public class View extends JFrame implements Observer {
                 if (youWin) {
                     BufferedImage image;
                     try {
-                        image = ImageIO.read(getClass().getResourceAsStream("/com/company/images/you_win.png")); // ImageIO.read(new File("src/com/company/images/you_win.png"));
+                        image = ImageIO.read(getClass().getResourceAsStream("/com/company/images/you_win.png"));
                         g.drawImage(image, 30, 30, this);
 
                         g.setPaint(Color.WHITE);
@@ -135,7 +129,7 @@ public class View extends JFrame implements Observer {
             } else {        // Display menu
                 BufferedImage image;
                 try {
-                    image = ImageIO.read(getClass().getResourceAsStream("/com/company/images/logo.png")); // ImageIO.read(new File("src/com/company/images/logo.png"));
+                    image = ImageIO.read(getClass().getResourceAsStream("/com/company/images/logo.png"));
                     g.drawImage(image, 30, 60, this);
                 } catch (IOException e) {
                     System.out.println(e);
@@ -191,38 +185,41 @@ public class View extends JFrame implements Observer {
     @Override
     public void update(Observable aModel, Object arg) {
         Model model = (Model) aModel;
-        ball = model.getBall();                  // Ball
-        bricks = model.getBricks();              // Bricks
-        bat = model.getBat();                    // Bat
-        score = model.getScore();                // Score
+        ball = model.getBall();                     // Ball
+        bricks = model.getBricks();                 // Bricks
+        bat = model.getBat();                       // Bat
+        score = model.getScore();                    // Score
         lives = model.getLives();
         menuItem1 = model.getMenuItem1();
         youWin = model.getYouWin();
         youLose = model.getYouLose();
         startGame = model.startGame;
         mute = model.mute;
-        repaint();                               // Re draw game
+        repaint();                                  // Re draw game
     }
 
     @Override
-    public void update(Graphics g) {        // Called by repaint
-        drawPicture((Graphics2D) g);        // Draw Picture
+    public void update(Graphics g) {                // Called by repaint
+        drawPicture((Graphics2D) g);                // Draw Picture
     }
 
 
     @Override
-    public void paint(Graphics g) {             // When 'Window' is first
-        drawPicture((Graphics2D) g);            // Draw Picture
+    public void paint(Graphics g) {                 // When 'Window' is first
+        drawPicture((Graphics2D) g);                // Draw Picture
     }
 
-    private BufferedImage theAI;              // Alternate Image
-    private Graphics2D theAG;                 // Alternate Graphics
+    private BufferedImage theAI;                    // Alternate Image
+    private Graphics2D theAG;                       // Alternate Graphics
 
     private void drawPicture( Graphics2D g ) {      // Double buffer
                                                     // to avoid flicker
-        if (bricks == null) return;                 // Race condition
+        if (bricks == null) {
+            return;
+            // Race condition
+        }
         if (theAG == null) {
-            Dimension d = getSize();              // Size of curr. image
+            Dimension d = getSize();                // Size of curr. image
             theAI = (BufferedImage) createImage(d.width, d.height);
             theAG = theAI.createGraphics();
         }
@@ -236,7 +233,7 @@ public class View extends JFrame implements Observer {
 
     private class Transaction implements KeyListener { // When character typed
         @Override
-        public void keyPressed(KeyEvent e) {     // Obey this method
+        public void keyPressed(KeyEvent e) {           // Obey this method
             controller.userKeyInteraction(-e.getKeyCode());
         }
 
