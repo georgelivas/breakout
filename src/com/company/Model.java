@@ -212,9 +212,9 @@ public class Model extends Observable {
                                     hit = true;
                                     sound.smash();
                                     brick.setVisibility(false);
-                                    System.out.println(PowerUps.bSquared.apply(2));
+                                    //System.out.println(PowerUps.bSquared.apply(2));
                                     if(brick.getPowerUp()) {
-                                        System.out.println("powerup found");
+                                        System.out.println("powerup found--- l1 model");
                                     }
                                     score += HIT_BRICK;
                                 }
@@ -227,14 +227,14 @@ public class Model extends Observable {
                                         score += HIT_BRICK;
                                         System.out.println(PowerUps.bSquared.apply(2));
                                         if (brick.getPowerUp()) {
-                                            System.out.println("powerup found");
-                                            System.out.println(
-                                                    PowerUps.arrayOfFunctions[
-                                                            new Random()
-                                                                    .nextInt(PowerUps
-                                                                            .arrayOfFunctions
-                                                                            .length)]
-                                                            .apply(2));
+                                            System.out.println("powerup found---- l2 model");
+//                                            System.out.println(
+//                                                    PowerUps.arrayOfFunctions[
+//                                                            new Random()
+//                                                                    .nextInt(PowerUps
+//                                                                            .arrayOfFunctions
+//                                                                            .length)]
+//                                                            .apply(2));
                                         }
                                     } else {
                                         sound.smash();

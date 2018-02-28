@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -30,18 +31,21 @@ public class Levels {
                 }
             }
         }
-        for (int i = 0; i < 4; i++) {
-            int index = new Random().nextInt(bricks.size());
-            GameObj brick = bricks.get(index);
-            if (!brick.getPowerUp()) {
-                brick.setPowerUp(true);
-                bricks.add(index, brick);
-                System.out.println("adding powerup");
-            } else {
-                i--;
-                System.out.println("powerup exists");
-            }
-        }
+//        for (int i = 0; i < 4; i++) {
+//            int index = new Random().nextInt(bricks.size());
+//            GameObj brick = bricks.get(index);
+//            if (!brick.getPowerUp()) {
+//                brick.setPowerUp(true);
+//                bricks.add(index, brick);
+//                System.out.println("adding powerUp");
+//            } else {
+//                i--;
+//                System.out.println("powerUp exists");
+//            }
+
+            Collections.shuffle(bricks);
+            bricks.stream().filter(elm -> !elm.getPowerUp()).limit((long)(3)).forEach(brk -> brk.setPowerUp(true));
+//        }
         return bricks;
     }
 
