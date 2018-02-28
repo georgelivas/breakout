@@ -1,10 +1,5 @@
 package com.company;
 
-/**
- * Make getting the time of day easier
- * @author Mike Smith University of Brighton
- */
-
 class Timer {
     private static long startTime;
 

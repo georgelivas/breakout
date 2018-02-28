@@ -8,7 +8,6 @@ import java.awt.event.KeyListener;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -27,15 +26,32 @@ public class View extends JFrame implements Observer {
     private boolean youLose;
 
     private boolean mute;
+    private boolean faster;
 
     public final int width;   // Size of screen Width
     public final int height;  // Sizeof screen Height
 
+    private BufferedImage muteLogo;
+    private BufferedImage volOn;
+    private BufferedImage youLoseLogo;
+    private BufferedImage youWinLogo;
+    private BufferedImage logo;
+
+
     public View(int width, int height) {
         this.width = width; this.height = height;
         setSize(width, height);                 // Size of window
-        addKeyListener( new Transaction() );    // Called when key press
+        addKeyListener(new Transaction());      // Called when key press
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        try {
+            muteLogo = ImageIO.read(getClass().getResourceAsStream("/com/company/images/mute.png"));
+            volOn = ImageIO.read(getClass().getResourceAsStream("/com/company/images/vol_on.png"));
+            youLoseLogo = ImageIO.read(getClass().getResourceAsStream("/com/company/images/you_lose.png"));
+            youWinLogo = ImageIO.read(getClass().getResourceAsStream("/com/company/images/you_win.png"));
+            logo = ImageIO.read(getClass().getResourceAsStream("/com/company/images/logo.png"));
+        } catch (Exception e){
+            Debug.error("can't load images", e);
+        }
         Timer.startTimer();
     }
 
@@ -81,59 +97,31 @@ public class View extends JFrame implements Observer {
                 g.setFont(smallFont);
                 g.drawString("\'v\' to change vol.", (width/2)+46, height - 12);
 
-                if (mute) {
-                    BufferedImage image;
-                    try {
-                        image = ImageIO.read(getClass().getResourceAsStream("/com/company/images/mute.png"));
-                        g.drawImage(image, (width/2)+20, height-28, this);
-                    } catch (IOException e) {
-                        System.out.println(e);
-                    }
-                } else {
-                    BufferedImage image;
-                    try {
-                        image = ImageIO.read(getClass().getResourceAsStream("/com/company/images/vol_on.png"));
-                        g.drawImage(image, (width/2)+20, height-28, this);
-                    } catch (IOException e) {
-                        System.out.println(e);
-                    }
+                g.drawImage(mute ? muteLogo : volOn, (width/2)+20, height-28, this);
+
+                if (faster) {
+                    g.setPaint(Color.WHITE);
+                    g.setFont(font);
+                    g.drawString("Faster", 35, 730);
                 }
 
                 if (youLose) {
-                    BufferedImage image;
-                    try {
-                        image = ImageIO.read(getClass().getResourceAsStream("/com/company/images/you_lose.png"));
-                        g.drawImage(image, 25, 330, this);
+                    g.drawImage(youLoseLogo, 25, 330, this);
 
-                        g.setPaint(Color.WHITE);
-                        g.setFont(font);
-                        g.drawString("Press ENTER for Menu.", 35, 730);
-                    } catch (IOException e) {
-                        System.out.println(e);
-                    }
+                    g.setPaint(Color.WHITE);
+                    g.setFont(font);
+                    g.drawString("Press ENTER for Menu.", 35, 730);
                 }
 
                 if (youWin) {
-                    BufferedImage image;
-                    try {
-                        image = ImageIO.read(getClass().getResourceAsStream("/com/company/images/you_win.png"));
-                        g.drawImage(image, 30, 30, this);
+                    g.drawImage(youWinLogo, 30, 30, this);
 
-                        g.setPaint(Color.WHITE);
-                        g.setFont(font);
-                        g.drawString("Press ENTER for Menu.", 100, 480);
-                    } catch (IOException e) {
-                        System.out.println(e);
-                    }
+                    g.setPaint(Color.WHITE);
+                    g.setFont(font);
+                    g.drawString("Press ENTER for Menu.", 100, 480);
                 }
             } else {        // Display menu
-                BufferedImage image;
-                try {
-                    image = ImageIO.read(getClass().getResourceAsStream("/com/company/images/logo.png"));
-                    g.drawImage(image, 30, 60, this);
-                } catch (IOException e) {
-                    System.out.println(e);
-                }
+                g.drawImage(logo, 30, 60, this);
 
                 displayGameObj(g, menuItem1);
                 g.setPaint(Color.WHITE);
@@ -195,6 +183,7 @@ public class View extends JFrame implements Observer {
         youLose = model.getYouLose();
         startGame = model.startGame;
         mute = model.mute;
+        faster = model.faster;
         repaint();                                  // Re draw game
     }
 

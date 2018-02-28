@@ -13,10 +13,6 @@ class PlaySound {
 
     public boolean mute = false;
 
-    public PlaySound() {
-
-    }
-
     public void smash() {
         if (!mute) {
             play(smash);
@@ -63,6 +59,5 @@ class PlaySound {
             System.out.println(e);
         }
     }
-
 }
 

@@ -34,7 +34,8 @@ public class Model extends Observable {
     private int lives = 3;
     public boolean startGame = false;
     public static boolean gameOver = false;
-    public static boolean mute = false;
+    public boolean mute = false;
+    public boolean faster = false;
 
     private boolean youWin;
     private boolean youLose;
@@ -62,7 +63,7 @@ public class Model extends Observable {
         synchronized (Model.class) {
             stopGame();
             active = new ActivePart();
-            active.setSpeed(level == 1 ? 4 : 5);
+            active.setSpeed(level == 1 ? 2 : 3);
             Thread t = new Thread(active::runAsSeparateThread);
             t.setDaemon(true);
             t.start();
@@ -164,11 +165,11 @@ public class Model extends Observable {
         }
 
         public void runAsSeparateThread() {
-            final float S = speed; // Units to move (Speed)
+            float S = speed; // Units to move (Speed)
 
             boolean hitBottom = false;
             try {
-                synchronized (Model.class) {        // Make thread safe
+                synchronized(Model.class) {         // Make thread safe
                     GameObj ball = getBall();       // Ball in game
                     GameObj bat = getBat();         // Bat
                     List<GameObj> bricks = getBricks();   // Bricks
@@ -264,8 +265,18 @@ public class Model extends Observable {
                             sound.bat();
                         }
 
-                        if (score < 1500) {
-                            this.setSpeed(5);
+                        if (score >= 1500 && level == 1 && S < 3) {
+                            S = 3;
+                            faster = true;
+                            new java.util.Timer().schedule(
+                                    new java.util.TimerTask() {
+                                        @Override
+                                        public void run() {
+                                            faster = false;
+                                        }
+                                    },
+                                    3000
+                            );
                         }
 
                         if (lives == 0) {
@@ -303,7 +314,7 @@ public class Model extends Observable {
 
                     modelChanged(); // Model changed refresh screen
                     if (startGame) {
-                        Thread.sleep(fast ? 2 : 20);
+                        Thread.sleep(fast ? 2 : 10);
                         ball.moveX(S);
                         ball.moveY(S);
                     }
