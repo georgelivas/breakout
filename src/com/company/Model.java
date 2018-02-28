@@ -216,10 +216,7 @@ public class Model extends Observable {
                                     //System.out.println(PowerUps.bSquared.apply(2));
                                     if(brick.getPowerUp()) {
                                         System.out.println("powerup found--- l1 model");
-                                        System.out.println(PowerUps.bSquared.apply(2));
-                                    }
-                                    if(brick.getPowerUp()) {
-                                        System.out.println("powerup found");
+                                        // System.out.println(PowerUps.bSquared.apply(2));
                                     }
                                     score += HIT_BRICK;
                                 }
@@ -240,16 +237,6 @@ public class Model extends Observable {
 //                                                                            .arrayOfFunctions
 //                                                                            .length)]
 //                                                            .apply(2));
-
-                                            System.out.println("powerup found");
-                                            System.out.println(
-                                                    PowerUps.arrayOfFunctions[
-                                                            new Random()
-                                                                    .nextInt(PowerUps
-                                                                            .arrayOfFunctions
-                                                                            .length)]
-                                                            .apply(2));
-
                                         }
                                     } else {
                                         sound.smash();
