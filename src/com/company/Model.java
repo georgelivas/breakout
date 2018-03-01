@@ -31,7 +31,7 @@ public class Model extends Observable {
     private final float H;                          // Height of area
 
     private int level;
-    private int lives = 3;
+    private int lives = 5;
     public boolean startGame = false;
     public static boolean gameOver = false;
     public boolean mute = false;
@@ -115,6 +115,10 @@ public class Model extends Observable {
 
     public int getLives() {
         return this.lives;
+    }
+
+    public int getLevel() {
+        return this.level;
     }
 
     public void setFast(boolean fast) {
@@ -242,7 +246,6 @@ public class Model extends Observable {
                                     } else {
                                         sound.smash();
                                         brick.increaseTimesHit();
-                                        brick.setColour(Colour.RED);
                                     }
                                 }
                             }

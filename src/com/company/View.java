@@ -20,6 +20,7 @@ public class View extends JFrame implements Observer {
     private int score =  0;           // The score
     private int frames = 0;           // Frames output
     private int lives = 0;
+    private int level;
     private GameObj menuItem1;
     private boolean startGame;
     private boolean youWin;
@@ -36,6 +37,7 @@ public class View extends JFrame implements Observer {
     private BufferedImage youLoseLogo;
     private BufferedImage youWinLogo;
     private BufferedImage logo;
+    private BufferedImage crack;
 
 
     public View(int width, int height) {
@@ -49,6 +51,7 @@ public class View extends JFrame implements Observer {
             youLoseLogo = ImageIO.read(getClass().getResourceAsStream("/com/company/images/you_lose.png"));
             youWinLogo = ImageIO.read(getClass().getResourceAsStream("/com/company/images/you_win.png"));
             logo = ImageIO.read(getClass().getResourceAsStream("/com/company/images/logo.png"));
+            crack = ImageIO.read(getClass().getResourceAsStream("/com/company/images/cracked_brick.png"));
         } catch (Exception e){
             Debug.error("can't load images", e);
         }
@@ -70,6 +73,13 @@ public class View extends JFrame implements Observer {
                 displayGameObj(g, bat);
 
                 bricks.stream().filter(GameObj::isVisible).forEach(brk -> displayGameObj(g, brk));
+                bricks.stream()
+                        .filter(e -> e.getTimesHit() > 0 && level == 2)
+                        .filter(GameObj::isVisible)
+                        .forEach(brk -> g.drawImage(crack, (int)brk.getX(), (int)brk.getY(), this)
+                        );
+
+
 
                 g.setPaint(Color.ORANGE);
                 FontMetrics fm = getFontMetrics(font);
@@ -178,6 +188,7 @@ public class View extends JFrame implements Observer {
         bat = model.getBat();                       // Bat
         score = model.getScore();                    // Score
         lives = model.getLives();
+        level = model.getLevel();
         menuItem1 = model.getMenuItem1();
         youWin = model.getYouWin();
         youLose = model.getYouLose();
