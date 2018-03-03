@@ -79,8 +79,6 @@ public class View extends JFrame implements Observer {
                         .forEach(brk -> g.drawImage(crack, (int)brk.getX(), (int)brk.getY(), this)
                         );
 
-
-
                 g.setPaint(Color.ORANGE);
                 FontMetrics fm = getFontMetrics(font);
                 String fmt = "Score: %6d fps=%5.1f";

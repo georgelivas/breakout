@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 public class Levels {
     private static float BRICK_WIDTH = 50;    // Brick size
@@ -18,19 +19,34 @@ public class Levels {
     public static List<GameObj> level1() {
         pickColor();
         List<GameObj> bricks = new ArrayList<>();
-
-        for (int x = 20; x < 592; x += 52){
-            for (int y = 50; y < 329; y += 31) {
-                if (
-                        !((y == 143 && (x > 72) && (x < 488)) ||
-                        (y == 112 && (x > 72) && (x < 488)) ||
-                        (y == 205 && (x > 72) && (x < 488)) ||
-                        (y == 236 && (x > 72) && (x < 488)))
-                ) {
-                    bricks.add(new GameObj(x, y, BRICK_WIDTH, BRICK_HEIGHT, pickColor()));
-                }
-            }
-        }
+//        for (int x = 20; x < 592; x += 52){
+//            for (int y = 50; y < 329; y += 31) {
+//                if (
+//                        !((y == 143 && (x > 72) && (x < 488)) ||
+//                                (y == 112 && (x > 72) && (x < 488)) ||
+//                                (y == 205 && (x > 72) && (x < 488)) ||
+//                                (y == 236 && (x > 72) && (x < 488)))
+//                        ) {
+//                    bricks.add(new GameObj(x, y, BRICK_WIDTH, BRICK_HEIGHT, pickColor()));
+//                }
+//            }
+//        }
+        IntStream
+                .iterate(20, x -> x + 52)
+                .limit(11)
+                .forEach(x ->
+                        IntStream
+                                .iterate(50, y -> y + 31)
+                                .limit(9)
+                                .filter(y -> !((y == 143 && (x > 72) && (x < 488)) ||
+                                        (y == 112 && (x > 72) && (x < 488)) ||
+                                        (y == 205 && (x > 72) && (x < 488)) ||
+                                        (y == 236 && (x > 72) && (x < 488))))
+                                .forEach( y ->
+                                        bricks.add(new GameObj(x, y, BRICK_WIDTH, BRICK_HEIGHT, pickColor()))
+                                )
+        );
+        
 //        for (int i = 0; i < 4; i++) {
 //            int index = new Random().nextInt(bricks.size());
 //            GameObj brick = bricks.get(index);

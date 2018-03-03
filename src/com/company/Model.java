@@ -250,7 +250,7 @@ public class Model extends Observable {
                                 }
                             }
 
-                            int brokenBricks = (int)bricks.stream().filter(elm -> !elm.isVisible()).count();
+                            long brokenBricks = bricks.stream().filter(elm -> !elm.isVisible()).count();
 
                             if (brokenBricks == bricks.size()) {
                                 gameOver = true;
