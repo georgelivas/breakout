@@ -1,8 +1,16 @@
-![](src/readme_src/logo.png)
+# ![](src/readme_src/logo.png)
 
 <p align="center"">
     <a align="center""><img src="https://img.shields.io/packagist/l/doctrine/orm.svg"></a>
     <a align="center"" href="https://georgelivas.github.io"><img src="https://img.shields.io/badge/Visit%20my-Blog-brightgreen.svg"></a>
+</p>
+<p align="center">
+  <a href="#description">Description</a> •
+  <a href="#system-requirements">System requirements</a> •
+  <a href="#get-started">Get started</a> •
+  <a href="#credits">Credits</a> •
+  <a href="#related">Related</a> •
+  <a href="#license">License</a>
 </p>
 
 # Description
@@ -30,11 +38,4 @@ The all time classic arcade game. The goal is to break all the bricks, without d
 1. Download the latest breakout.jar release from [Releases](ADD LINK).
 2. Save the file.
 3. Open the app.
-<style>
-    .callout {
-        float: right;
-    }
-    img[alt$=">"] {
-      float:right;
-    }
-</style>
+
