@@ -1,17 +1,18 @@
 ![](src/readme_src/logo.png)
 
 [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)]() [![Visit my Blog alt >](https://img.shields.io/badge/Visit%20my-Blog-brightgreen.svg)](https://georgelivas.github.io){: .callout}
-#Description
+
+# Description
 The all time classic arcade game. The goal is to break all the bricks, without dropping the ball. You have only 3 lives❤❤❤️.
 
-#System requirements
+# System requirements
 
 * Java 1.8 
 * Java Virtual Machine
 
-#Get started
+# Get started
 
-###Mac users
+### Mac users
 1. Download the latest breakout.dmg release from [Releases](ADD LINK).
 2. Drag and drop the app to your Applications folder.
 3. Open the app.
@@ -22,7 +23,7 @@ The all time classic arcade game. The goal is to break all the bricks, without d
     System Preferences > Security & Privacy > General > (click) Open Anyway
     ``
 4. Enjoy
-###Windows users
+### Windows users
 1. Download the latest breakout.jar release from [Releases](ADD LINK).
 2. Save the file.
 3. Open the app.
