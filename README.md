@@ -5,8 +5,6 @@
     <a align="right"" href="https://georgelivas.github.io"><img src="https://img.shields.io/badge/Visit%20my-Blog-brightgreen.svg"></a>
 </p>
 
-[<img src="https://img.shields.io/badge/Visit%20my-Blog-brightgreen.svg" align="right" style="margin-left: 20px">](https://georgelivas.github.io)
-
 # Description
 The all time classic arcade game. The goal is to break all the bricks, without dropping the ball. You have only 3 lives ❤❤❤.
 
