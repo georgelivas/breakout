@@ -1,11 +1,9 @@
 ![](src/readme_src/logo.png)
 
-<div style="float:left;margin:0 10px 10px 0" markdown="1">
-    [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)]() [![Visit my Blog alt >](https://img.shields.io/badge/Visit%20my-Blog-brightgreen.svg)](https://georgelivas.github.io)
-</div>
+[![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)]() [![Visit my Blog alt >](https://img.shields.io/badge/Visit%20my-Blog-brightgreen.svg)](https://georgelivas.github.io){: .callout}
 
 # Description
-The all time classic arcade game. The goal is to break all the bricks, without dropping the ball. You have only 3 lives❤❤❤️.
+The all time classic arcade game. The goal is to break all the bricks, without dropping the ball. You have only 3 lives ❤❤❤.
 
 # System requirements
 
