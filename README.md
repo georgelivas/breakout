@@ -1,8 +1,8 @@
 ![](src/readme_src/logo.png)
 
-<p align="right"">
-    <a align="right""><img src="https://img.shields.io/packagist/l/doctrine/orm.svg"></a>
-    <a align="right"" href="https://georgelivas.github.io"><img src="https://img.shields.io/badge/Visit%20my-Blog-brightgreen.svg"></a>
+<p align="center"">
+    <a align="center""><img src="https://img.shields.io/packagist/l/doctrine/orm.svg"></a>
+    <a align="center"" href="https://georgelivas.github.io"><img src="https://img.shields.io/badge/Visit%20my-Blog-brightgreen.svg"></a>
 </p>
 
 # Description
