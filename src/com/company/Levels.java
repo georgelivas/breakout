@@ -17,20 +17,8 @@ public class Levels {
     }
 
     public static List<GameObj> level1() {
-        pickColor();
         List<GameObj> bricks = new ArrayList<>();
-//        for (int x = 20; x < 592; x += 52){
-//            for (int y = 50; y < 329; y += 31) {
-//                if (
-//                        !((y == 143 && (x > 72) && (x < 488)) ||
-//                                (y == 112 && (x > 72) && (x < 488)) ||
-//                                (y == 205 && (x > 72) && (x < 488)) ||
-//                                (y == 236 && (x > 72) && (x < 488)))
-//                        ) {
-//                    bricks.add(new GameObj(x, y, BRICK_WIDTH, BRICK_HEIGHT, pickColor()));
-//                }
-//            }
-//        }
+
         IntStream
                 .iterate(20, x -> x + 52)
                 .limit(11)
@@ -38,7 +26,8 @@ public class Levels {
                         IntStream
                                 .iterate(50, y -> y + 31)
                                 .limit(9)
-                                .filter(y -> !((y == 143 && (x > 72) && (x < 488)) ||
+                                .filter(y ->
+                                        !((y == 143 && (x > 72) && (x < 488)) ||
                                         (y == 112 && (x > 72) && (x < 488)) ||
                                         (y == 205 && (x > 72) && (x < 488)) ||
                                         (y == 236 && (x > 72) && (x < 488))))
@@ -46,22 +35,9 @@ public class Levels {
                                         bricks.add(new GameObj(x, y, BRICK_WIDTH, BRICK_HEIGHT, pickColor()))
                                 )
         );
-        
-//        for (int i = 0; i < 4; i++) {
-//            int index = new Random().nextInt(bricks.size());
-//            GameObj brick = bricks.get(index);
-//            if (!brick.getPowerUp()) {
-//                brick.setPowerUp(true);
-//                bricks.add(index, brick);
-//                System.out.println("adding powerUp");
-//            } else {
-//                i--;
-//                System.out.println("powerUp exists");
-//            }
 
-            Collections.shuffle(bricks);
-            bricks.stream().filter(elm -> !elm.getPowerUp()).limit((long)(3)).forEach(brk -> brk.setPowerUp(true));
-//        }
+        Collections.shuffle(bricks);
+        bricks.stream().filter(elm -> !elm.getPowerUp()).limit((long)(3)).forEach(brk -> brk.setPowerUp(true));
         return bricks;
     }
 
