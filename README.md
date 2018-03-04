@@ -14,7 +14,7 @@
 </p>
 
 # Description
-The all time classic arcade game. The goal is to break all the bricks, without dropping the ball. You have only 3 lives ❤❤❤.
+The all time classic arcade game. The goal is to break all the bricks and get a high score, without dropping the ball. You have only 3 lives ❤❤❤.
 
 # System requirements
 
@@ -39,3 +39,5 @@ The all time classic arcade game. The goal is to break all the bricks, without d
 2. Save the file.
 3. Open the app.
 
+# License
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/georgelivas/breakout/blob/master/LICENSE) file for details
