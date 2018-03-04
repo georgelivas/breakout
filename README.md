@@ -1,9 +1,12 @@
 ![](src/readme_src/logo.png)
 
-<p style="margin-left:50%;">
-    <a style="text-align:center;"><img src="https://img.shields.io/packagist/l/doctrine/orm.svg"></img></a>
-    <a style="text-align:center;" href="https://georgelivas.github.io"><img src="https://img.shields.io/badge/Visit%20my-Blog-brightgreen.svg"></img></a>
+<p align="right"">
+    <a align="right""><img src="https://img.shields.io/packagist/l/doctrine/orm.svg"></a>
+    <a align="right"" href="https://georgelivas.github.io"><img src="https://img.shields.io/badge/Visit%20my-Blog-brightgreen.svg"></a>
 </p>
+
+[<img src="https://img.shields.io/badge/Visit%20my-Blog-brightgreen.svg" align="right" style="margin-left: 20px">](https://georgelivas.github.io)
+
 # Description
 The all time classic arcade game. The goal is to break all the bricks, without dropping the ball. You have only 3 lives ❤❤❤.
 
