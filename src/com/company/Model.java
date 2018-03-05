@@ -3,6 +3,7 @@ package com.company;
 import java.util.List;
 import java.util.Observable;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 public class Model extends Observable {
     private static final int B = 6;                 // Border offset
@@ -282,11 +283,25 @@ public class Model extends Observable {
                             );
                         }
 
+                        bricks.stream()
+                                .filter(e -> level == 1)
+                                .filter(brk -> !brk.isVisible())
+                                .filter(brk -> brk.getReturnTimes() < 1)
+                                .forEach(brk -> brk.increaseSecOut(1));
+                        bricks.stream()
+                                .filter(brk -> brk.getSecOut() > (score > 1500 ? 9000 : 7000))
+                                .forEach(brk -> {
+                                    brk.setVisibility(true);
+                                    brk.setSecOut(0);
+                                    brk.setReturnTimes(1);
+                                });
+
                         if (lives == 0) {
                             gameOver = true;
                             youLose = true;
                             sound.gameOver();
                         }
+
 
                         if (gameOver) {
                             stop();

@@ -9,7 +9,6 @@
   <a href="#system-requirements">System requirements</a> •
   <a href="#get-started">Get started</a> •
   <a href="#credits">Credits</a> •
-  <a href="#related">Related</a> •
   <a href="#license">License</a>
 </p>
 

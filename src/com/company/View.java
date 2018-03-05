@@ -11,6 +11,9 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class View extends JFrame implements Observer {
     private Controller controller;
@@ -95,6 +98,11 @@ public class View extends JFrame implements Observer {
                 for (int i = 0; i < this.lives; i++) {
                     lives += "♥";
                 }
+
+                Set<Character> set = lives.chars()
+                        .mapToObj(ch -> (char)ch)
+                        .collect(Collectors.toSet());
+
                 g.setPaint(Color.RED);
                 FontMetrics fm1 = getFontMetrics(font);
                 g.drawString(lives, width - 80, height - 5);

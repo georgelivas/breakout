@@ -11,6 +11,8 @@ public class GameObj {
     private int   dirY   = 1;    // Direction Y (1 or -1)
     private int timesHit = 0;
     private boolean powerUp = false;
+    private int secOut = 0;
+    private int returnTimes = 0;
 
     public GameObj(float x, float y, float widthIs, float heightIs, Colour colour) {
       topX = x;
@@ -62,6 +64,26 @@ public class GameObj {
 
     public int getTimesHit() {
         return this.timesHit;
+    }
+
+    public int getSecOut() {
+        return this.secOut;
+    }
+
+    public void setSecOut(int sec) {
+        this.secOut = sec;
+    }
+
+    public void increaseSecOut(int secOut) {
+        this.secOut += secOut;
+    }
+
+    public void setReturnTimes(int returnTimes) {
+        this.returnTimes = returnTimes;
+    }
+
+    public int getReturnTimes() {
+        return this.returnTimes;
     }
 
     public void increaseTimesHit() {
