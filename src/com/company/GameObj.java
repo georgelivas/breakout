@@ -98,6 +98,10 @@ public class GameObj {
         this.colour = c;
     }
 
+    public void setWidth(float width) {
+        this.width = width;
+    }
+
     public void moveX(float units) {
         topX += units * dirX;
     }

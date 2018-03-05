@@ -1,9 +1,11 @@
 package com.company;
 
-import java.util.List;
-import java.util.Observable;
-import java.util.Random;
+import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Model extends Observable {
     private static final int B = 6;                 // Border offset
@@ -40,6 +42,7 @@ public class Model extends Observable {
 
     private boolean youWin;
     private boolean youLose;
+    private List<Consumer> powerUps = new ArrayList<>();
 
     public Model(int width, int height) {
         this.W = width;
@@ -55,6 +58,8 @@ public class Model extends Observable {
                     BRICK_HEIGHT / 4, Colour.WHITE);
             bricks = level == 1 ? Levels.level1() : Levels.level2();
 
+            powerUps.add(lives -> this.lives += (int)lives);
+            powerUps.add(length -> bat.setWidth(BRICK_WIDTH * 4));
         }
     }
 
@@ -158,6 +163,12 @@ public class Model extends Observable {
         menuItem1.setTopY(direction.equals("up") ? H/2-145 : H/2+5);
     }
 
+//    Consumer<Integer> increaseLives = lives -> this.lives += lives;
+//    Consumer<Integer> increaseBatLength = length -> bat.setWidth(BRICK_WIDTH * length);
+//    List<Consumer> powerups = new ArrayList<>();
+
+    // Consumer []powerups = {lives -> this.lives += (int)lives, length -> bat.setWidth(BRICK_WIDTH * (int)length)};
+
     class ActivePart {
         private boolean runGame = true;
         public void stop() {
@@ -223,6 +234,8 @@ public class Model extends Observable {
                                     if(brick.getPowerUp()) {
                                         System.out.println("powerup found--- l1 model");
                                         // System.out.println(PowerUps.bSquared.apply(2));
+                                        Collections.shuffle(powerUps);
+                                        powerUps.stream().limit(1).forEach(f -> f.accept(1));
                                     }
                                     score += HIT_BRICK;
                                 }
@@ -301,7 +314,6 @@ public class Model extends Observable {
                             youLose = true;
                             sound.gameOver();
                         }
-
 
                         if (gameOver) {
                             stop();
