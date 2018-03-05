@@ -274,6 +274,8 @@ public class Levels {
         dist +=31;
         bricks.add(new GameObj(540, dist, BRICK_WIDTH, BRICK_HEIGHT, Colour.WHITE));
 
+        Collections.shuffle(bricks);
+        bricks.stream().filter(elm -> !elm.getPowerUp()).limit((long)(3)).forEach(brk -> brk.setPowerUp(true));
         return bricks;
     }
 }

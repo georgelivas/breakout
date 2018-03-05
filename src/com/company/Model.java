@@ -60,6 +60,7 @@ public class Model extends Observable {
 
             powerUps.add(lives -> this.lives += (int)lives);
             powerUps.add(length -> bat.setWidth(BRICK_WIDTH * 4));
+            powerUps.add(speed -> active.speed = level == 2 ? active.speed -= 1 : active.speed);
         }
     }
 
@@ -174,7 +175,7 @@ public class Model extends Observable {
         public void stop() {
             runGame = false;
         }
-        private int speed;
+        public int speed;
 
         public void setSpeed(int speed) {
             this.speed = speed;
@@ -246,7 +247,6 @@ public class Model extends Observable {
                                         sound.smash();
                                         brick.setVisibility(false);
                                         score += HIT_BRICK;
-                                        System.out.println(PowerUps.bSquared.apply(2));
                                         if (brick.getPowerUp()) {
                                             System.out.println("powerup found---- l2 model");
 //                                            System.out.println(
@@ -256,6 +256,8 @@ public class Model extends Observable {
 //                                                                            .arrayOfFunctions
 //                                                                            .length)]
 //                                                            .apply(2));
+                                            Collections.shuffle(powerUps);
+                                            powerUps.stream().limit(1).forEach(f -> f.accept(1));
                                         }
                                     } else {
                                         sound.smash();
