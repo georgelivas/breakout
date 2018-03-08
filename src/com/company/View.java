@@ -13,7 +13,6 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class View extends JFrame implements Observer {
     private Controller controller;
@@ -31,6 +30,7 @@ public class View extends JFrame implements Observer {
 
     private boolean mute;
     private boolean faster;
+    private String label;
 
     public final int width;   // Size of screen Width
     public final int height;  // Sizeof screen Height
@@ -105,7 +105,7 @@ public class View extends JFrame implements Observer {
 
                 g.setPaint(Color.RED);
                 FontMetrics fm1 = getFontMetrics(font);
-                g.drawString(lives, width - 80, height - 5);
+                g.drawString(lives, width - 120, height - 5);
 
                 g.setPaint(Color.GRAY);
                 FontMetrics fm2 = getFontMetrics(font);
@@ -114,6 +114,10 @@ public class View extends JFrame implements Observer {
                 g.drawString("\'v\' to change vol.", (width/2)+46, height - 12);
 
                 g.drawImage(mute ? muteLogo : volOn, (width/2)+20, height-28, this);
+
+                g.setPaint(Color.WHITE);
+                g.setFont(font);
+                g.drawString(label, 35, 730);
 
                 if (faster) {
                     g.setPaint(Color.WHITE);
@@ -201,6 +205,7 @@ public class View extends JFrame implements Observer {
         startGame = model.startGame;
         mute = model.mute;
         faster = model.faster;
+        label = model.label;
         repaint();                                  // Re draw game
     }
 

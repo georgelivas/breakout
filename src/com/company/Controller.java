@@ -2,8 +2,6 @@ package com.company;
 
 import java.awt.event.KeyEvent;
 
-import static com.company.Main.H;
-import static com.company.Main.W;
 import static com.company.Model.gameOver;
 
 public class Controller {

@@ -5,7 +5,7 @@ public class Main {
     public static final int W = 600;                // Width of window
 
     public static void main( String args[] ) {
-        Debug.trace("BreakOut");
+        // Debug.trace("BreakOut");
         Debug.set(false);                            // Set true to get debug info
 
         Model model = new Model(W, H);              // model of the Game

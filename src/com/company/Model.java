@@ -30,11 +30,12 @@ public class Model extends Observable {
     private final float H;                          // Height of area
 
     private int level;
-    private int lives = 5;
+    private int lives = 3;
     public boolean startGame = false;
     public static boolean gameOver = false;
     public boolean mute = false;
     public boolean faster = false;
+    public String label = "";
 
     private boolean youWin;
     private boolean youLose;
@@ -54,9 +55,9 @@ public class Model extends Observable {
                     BRICK_HEIGHT / 4, Colour.WHITE);
             bricks = level == 1 ? Levels.level1() : Levels.level2();
 
-            powerUps.add(lives -> this.lives += (int)lives);
-            powerUps.add(length -> bat.setWidth(BRICK_WIDTH * 4));
-            powerUps.add(speed -> active.speed = level == 2 ? active.speed -= 1 : active.speed);
+            powerUps.add(lives -> {this.lives += (int)lives; showLabel("Extra Live!");});
+            powerUps.add(length -> {bat.setWidth(BRICK_WIDTH * 4); showLabel("Longer Bat!");});
+            powerUps.add(speed -> {active.speed = level == 2 ? active.speed -= 1 : active.speed; showLabel("Slower Ball!");});
         }
     }
 
@@ -90,6 +91,19 @@ public class Model extends Observable {
         lives = 3;
         createGameObjects(1);
         startGame();
+    }
+
+    public void showLabel(String text) {
+        label = text;
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        label = "";
+                    }
+                },
+                3000
+        );
     }
 
     public GameObj getBat() {
@@ -134,10 +148,6 @@ public class Model extends Observable {
 
     public boolean getYouLose() {
         return youLose;
-    }
-
-    public void setLives(int lives) {
-        this.lives = lives;
     }
 
     public void moveBat(int direction) {
@@ -229,7 +239,7 @@ public class Model extends Observable {
 
                                     //System.out.println(PowerUps.bSquared.apply(2));
                                     if(brick.getPowerUp()) {
-                                        System.out.println("powerup found--- l1 model");
+                                        // System.out.println("powerup found--- l1 model");
                                         // System.out.println(PowerUps.bSquared.apply(2));
                                         Collections.shuffle(powerUps);
                                         powerUps.stream().limit(1).forEach(f -> f.accept(1));
@@ -244,7 +254,7 @@ public class Model extends Observable {
                                         brick.setVisibility(false);
                                         score += HIT_BRICK;
                                         if (brick.getPowerUp()) {
-                                            System.out.println("powerup found---- l2 model");
+                                            // System.out.println("powerup found---- l2 model");
 //                                            System.out.println(
 //                                                    PowerUps.arrayOfFunctions[
 //                                                            new Random()
