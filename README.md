@@ -3,9 +3,10 @@
 <p align="center"">
     <a align="center"><img src="https://img.shields.io/packagist/l/doctrine/orm.svg"></a>
     <a align="center" href=""><img src="https://img.shields.io/badge/release%20date-March%209-orange.svg"></a>
-    <a align="center" href="https://georgelivas.github.io"><img src="https://img.shields.io/badge/size-2.1MB-yellow.svg"></a>
-    <a align="center" href="https://georgelivas.github.io"><img src="https://img.shields.io/badge/version-3.0-red.svg"></a>
-    <a align="center" href="https://georgelivas.github.io"><img src="https://img.shields.io/badge/Visit%20my-Blog-brightgreen.svg"></a>
+    <a align="center" href=""><img src="https://img.shields.io/badge/platform-macOS%20%7C%20Windows-ff69b4.svg"></a>
+    <a align="center" href=""><img src="https://img.shields.io/badge/size-2.1MB-yellow.svg"></a>
+    <a align="center" href=""><img src="https://img.shields.io/badge/version-3.0-red.svg"></a>
+    <a align="center" href=""><img src="https://img.shields.io/badge/Visit%20my-Blog-brightgreen.svg"></a>
 </p>
 <p align="center">
     <a href="#description">Description</a> •
