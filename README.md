@@ -1,19 +1,22 @@
 # ![](src/readme_src/logo.png)
 
 <p align="center"">
-    <a align="center""><img src="https://img.shields.io/packagist/l/doctrine/orm.svg"></a>
-    <a align="center"" href="https://georgelivas.github.io"><img src="https://img.shields.io/badge/Visit%20my-Blog-brightgreen.svg"></a>
+    <a align="center"><img src="https://img.shields.io/packagist/l/doctrine/orm.svg"></a>
+    <a align="center" href=""><img src="https://img.shields.io/badge/release%20date-March%209-orange.svg"></a>
+    <a align="center" href="https://georgelivas.github.io"><img src="https://img.shields.io/badge/size-2.1MB-yellow.svg"></a>
+    <a align="center" href="https://georgelivas.github.io"><img src="https://img.shields.io/badge/version-3.0-red.svg"></a>
+    <a align="center" href="https://georgelivas.github.io"><img src="https://img.shields.io/badge/Visit%20my-Blog-brightgreen.svg"></a>
 </p>
 <p align="center">
-  <a href="#description">Description</a> •
-  <a href="#system-requirements">System requirements</a> •
-  <a href="#get-started">Get started</a> •
-  <a href="#credits">Credits</a> •
-  <a href="#license">License</a>
+    <a href="#description">Description</a> •
+    <a href="#system-requirements">System requirements</a> •
+    <a href="#get-started">Get started</a> •
+    <a href="#credits">Credits</a> •
+    <a href="#license">License</a>
 </p>
 
 # Description
-The all time classic arcade game. The goal is to break all the bricks and get a high score, without dropping the ball. You have only 3 lives ❤❤❤.
+The all time classic arcade game. The goal is to break all the bricks and get a high score, without dropping the ball. You have only ❤❤❤ lives.
 
 # System requirements
 
