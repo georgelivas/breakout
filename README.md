@@ -37,6 +37,7 @@ The all time classic arcade game. The goal is to break all the bricks and get a 
     System Preferences > Security & Privacy > General > (click) Open Anyway
     ``
 4. Enjoy
+
 ### Windows users
 1. Download the latest breakout.jar release from [Releases](ADD LINK).
 2. Save the file.
