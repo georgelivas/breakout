@@ -2,10 +2,10 @@
 
 <p align="center">
     <a align="center"><img src="https://img.shields.io/packagist/l/doctrine/orm.svg"></a>
-    <a align="center" href=""><img src="https://img.shields.io/badge/release%20date-March%209-orange.svg"></a>
+    <a align="center" href=""><img src="https://img.shields.io/badge/release%20date-March%2010-orange.svg"></a>
     <a align="center" href=""><img src="https://img.shields.io/badge/platform-macOS%20%7C%20Windows-ff69b4.svg"></a>
-    <a align="center" href=""><img src="https://img.shields.io/badge/size-2.1MB-yellow.svg"></a>
-    <a align="center" href=""><img src="https://img.shields.io/badge/version-3.0-red.svg"></a>
+    <a align="center" href=""><img src="https://img.shields.io/badge/size-1.1MB-yellow.svg"></a>
+    <a align="center" href=""><img src="https://img.shields.io/badge/version-3.2-red.svg"></a>
     <a align="center" href="http://georgelivas.site"><img src="https://img.shields.io/badge/Visit%20my-Blog-brightgreen.svg"></a>
 </p>
 <p align="center">
@@ -27,7 +27,7 @@ The all time classic arcade game. The goal is to break all the bricks and get a 
 # Get started
 
 ### Mac users
-1. Download the latest breakout.dmg release from [Releases](ADD LINK).
+1. Download the latest breakout.dmg release from [Releases](https://github.com/georgelivas/breakout/releases/tag/V3.2(2.0)).
 2. Drag and drop the app to your Applications folder.
 3. Open the app.
     >If a window like this one comes up,
@@ -39,7 +39,7 @@ The all time classic arcade game. The goal is to break all the bricks and get a 
 4. Enjoy
 
 ### Windows users
-1. Download the latest breakout.jar release from [Releases](ADD LINK).
+1. Download the latest breakout.jar release from [Releases](https://github.com/georgelivas/breakout/releases/tag/V3.2(2.0)).
 2. Save the file.
 3. Open the app.
 
