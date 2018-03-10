@@ -27,7 +27,7 @@ The all time classic arcade game. The goal is to break all the bricks and get a 
 # Get started
 
 ### Mac users
-1. Download the latest breakout.dmg release from [Releases](https://github.com/georgelivas/breakout/releases/tag/V3.2(2.0)).
+1. Download the latest Breakout.dmg release from [Releases](https://github.com/georgelivas/breakout/releases/tag/V3.2(2.0)).
 2. Drag and drop the app to your Applications folder.
 3. Open the app.
     >If a window like this one comes up,
@@ -39,13 +39,14 @@ The all time classic arcade game. The goal is to break all the bricks and get a 
 4. Enjoy
 
 ### Windows users
-1. Download the latest breakout.jar release from [Releases](https://github.com/georgelivas/breakout/releases/tag/V3.2(2.0)).
+1. Download the latest Breakout.jar release from [Releases](https://github.com/georgelivas/breakout/releases/tag/V3.2(2.0)).
 2. Save the file.
 3. Open the app.
 
 # How to play
 > This game doesn't support mouse interaction.
 
+## Controls
 
 |    Key    |       Action     |       Usage     |
 | :-------: | :--------------: | :-------------: |
@@ -60,7 +61,7 @@ The all time classic arcade game. The goal is to break all the bricks and get a 
 | ``d``     | Go right         |   Move the bat  |
 | ``v``     | Mute / Unmute    | Used during game |
 | ``p``     | Play / Pause     | Used during game |
-| ``f``     | Super fast       | Increase the speedof the ball |
+| ``f``     | Super fast       | Increase the speed of the ball |
 | ``n``     | Normal speed     | Reset speed to normal |
 
 # License
