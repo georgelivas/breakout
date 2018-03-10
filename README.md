@@ -47,7 +47,7 @@ The all time classic arcade game. The goal is to break all the bricks and get a 
 > This game doesn't support mouse interaction.
 
 
-|  Key  |       action     |       usage     |
+|  Key  |       Action     |       Usage     |
 | :---: | :--------------: | :-------------: |
 | ENTER | Select or Return |   Used in menu  |
 | ⬆    | Go up         	|   Used in menu  |
@@ -56,6 +56,8 @@ The all time classic arcade game. The goal is to break all the bricks and get a 
 | ➡    | Go right			|   Move the bat  |
 | v	    | Mute / Unmute    | Used during game |
 | p	    | Play / Pause     | Used during game |
+| f    | Super fast       | Increase the speedof the ball |
+| n    | Normal speed     | Reset speed to normal |
 
 # License
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/georgelivas/breakout/blob/master/LICENSE) file for details
