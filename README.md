@@ -12,7 +12,7 @@
     <a href="#description">Description</a> •
     <a href="#system-requirements">System requirements</a> •
     <a href="#get-started">Get started</a> •
-    <a href="#credits">Credits</a> •
+    <a href="#how-to-play">How to play</a> •
     <a href="#license">License</a>
 </p>
 
