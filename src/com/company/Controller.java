@@ -41,7 +41,6 @@ public class Controller {
                 break;
             case 'p' :
                 model.pause = !model.pause;
-                System.out.println(model.pause);
                 break;
             case -KeyEvent.VK_UP:
                 model.moveMenuItem("up");
@@ -64,7 +63,7 @@ public class Controller {
                     model.reset();
                 }
             default :
-                Debug.trace("Ch typed = %3d [%c]", keyCode, (char) keyCode);
+                Debug.trace("Ch typed = %3d [%c]", keyCode, (char)keyCode);
         }
     }
 }

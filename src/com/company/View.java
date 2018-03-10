@@ -38,6 +38,8 @@ public class View extends JFrame implements Observer {
 
     private BufferedImage muteLogo;
     private BufferedImage volOn;
+    private BufferedImage playLogo;
+    private BufferedImage pauseLogo;
     private BufferedImage youLoseLogo;
     private BufferedImage youWinLogo;
     private BufferedImage logo;
@@ -52,6 +54,8 @@ public class View extends JFrame implements Observer {
         try {
             muteLogo = ImageIO.read(getClass().getResourceAsStream("/com/company/images/mute.png"));
             volOn = ImageIO.read(getClass().getResourceAsStream("/com/company/images/vol_on.png"));
+            playLogo = ImageIO.read(getClass().getResourceAsStream("/com/company/images/playLogo.png"));
+            pauseLogo = ImageIO.read(getClass().getResourceAsStream("/com/company/images/pauseLogo.png"));
             youLoseLogo = ImageIO.read(getClass().getResourceAsStream("/com/company/images/you_lose.png"));
             youWinLogo = ImageIO.read(getClass().getResourceAsStream("/com/company/images/you_win.png"));
             logo = ImageIO.read(getClass().getResourceAsStream("/com/company/images/logo.png"));
@@ -122,6 +126,12 @@ public class View extends JFrame implements Observer {
                 g.drawString("\'v\' for vol.", (width/2)+15, height - 12);
 
                 g.drawImage(mute ? muteLogo : volOn, (width/2)-15, height-28, this);
+
+                g.setPaint(Color.GRAY);
+                g.setFont(smallFont);
+                g.drawString("\'p\' to", (width/2)+90, height - 12);
+
+                g.drawImage(pause ? playLogo : pauseLogo, (width/2)+120, height-28, this);
 
                 g.setPaint(Color.WHITE);
                 g.setFont(font);
