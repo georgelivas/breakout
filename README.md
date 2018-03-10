@@ -46,6 +46,10 @@ The all time classic arcade game. The goal is to break all the bricks and get a 
 # How to play
 > This game doesn't support mouse interaction.
 
+After openig the app, use ``up, down and ENTER`` keys to select level. Then control the bat with ``left and right`` keys.
+
+> 
+
 ## Controls
 
 |    Key    |       Action     |       Usage     |
