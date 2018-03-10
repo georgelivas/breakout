@@ -42,6 +42,7 @@ The all time classic arcade game. The goal is to break all the bricks and get a 
 1. Download the latest Breakout.jar release from [Releases](https://github.com/georgelivas/breakout/releases/tag/V3.2(2.0)).
 2. Save the file.
 3. Open the app.
+4. Enjoy
 
 # How to play
 > This game doesn't support mouse interaction.
