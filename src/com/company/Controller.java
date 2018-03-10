@@ -39,6 +39,10 @@ public class Controller {
             case 'v' :
                 model.mute = !model.mute;
                 break;
+            case 'p' :
+                model.pause = !model.pause;
+                System.out.println(model.pause);
+                break;
             case -KeyEvent.VK_UP:
                 model.moveMenuItem("up");
                 break;

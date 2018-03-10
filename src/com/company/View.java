@@ -30,6 +30,7 @@ public class View extends JFrame implements Observer {
 
     private boolean mute;
     private boolean faster;
+    private boolean pause;
     private String label;
 
     public final int width;   // Size of screen Width
@@ -82,17 +83,24 @@ public class View extends JFrame implements Observer {
                         .forEach(brk -> g.drawImage(crack, (int)brk.getX(), (int)brk.getY(), this)
                         );
 
-                g.setPaint(Color.ORANGE);
-                FontMetrics fm = getFontMetrics(font);
-                String fmt = "Score: %6d fps=%5.1f";
-                String text = String.format(fmt, score,
-                        frames / (Timer.timeTaken() / 1000.0)
-                );
-
+                String text;
+                if(!pause) {
+                    g.setPaint(Color.ORANGE);
+                    FontMetrics fm = getFontMetrics(font);
+                    String fmt = "Score: %4d fps=%5.1f";
+                    text = String.format(fmt, score,
+                            frames / (Timer.timeTaken() / 1000.0)
+                    );
+                } else {
+                    g.setPaint(Color.ORANGE);
+                    FontMetrics fm = getFontMetrics(font);
+                    String fmt = "Score: %4d fps=%5.1f";
+                    text = String.format(fmt, score, 0.0);
+                }
                 frames = 0;
                 Timer.startTimer();
 
-                g.drawString(text, 10, height - 5);
+                g.drawString(text, 5, height - 5);
 
                 String lives = "";
                 for (int i = 0; i < this.lives; i++) {
@@ -111,9 +119,9 @@ public class View extends JFrame implements Observer {
                 FontMetrics fm2 = getFontMetrics(font);
                 Font smallFont = new Font("Bell MT", Font.BOLD,11);
                 g.setFont(smallFont);
-                g.drawString("\'v\' to change vol.", (width/2)+46, height - 12);
+                g.drawString("\'v\' for vol.", (width/2)+15, height - 12);
 
-                g.drawImage(mute ? muteLogo : volOn, (width/2)+20, height-28, this);
+                g.drawImage(mute ? muteLogo : volOn, (width/2)-15, height-28, this);
 
                 g.setPaint(Color.WHITE);
                 g.setFont(font);
@@ -205,6 +213,7 @@ public class View extends JFrame implements Observer {
         startGame = model.startGame;
         mute = model.mute;
         faster = model.faster;
+        pause = model.pause;
         label = model.label;
         repaint();                                  // Re draw game
     }

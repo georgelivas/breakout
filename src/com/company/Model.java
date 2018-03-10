@@ -35,6 +35,7 @@ public class Model extends Observable {
     public static boolean gameOver = false;
     public boolean mute = false;
     public boolean faster = false;
+    public boolean pause = false;
     public String label = "";
 
     private boolean youWin;
@@ -151,17 +152,19 @@ public class Model extends Observable {
     }
 
     public void moveBat(int direction) {
-        if (level == 2) {
-            if (bat.getX() <= 500 && direction > 0 || bat.getX() >= 40 && direction < 0) {
-                float dist = direction * BAT_MOVE * level;    // Actual distance to move
-                Debug.trace("Model: Move bat = %6.2f", dist);
-                bat.moveX(dist);
-            }
-        } else {
-            if (bat.getX() < 420 && direction > 0 || bat.getX() > 30 && direction < 0) {
-                float dist = direction * BAT_MOVE * level;    // Actual distance to move
-                Debug.trace("Model: Move bat = %6.2f", dist);
-                bat.moveX(dist);
+        if(!pause) {
+            if (level == 2) {
+                if (bat.getX() <= 500 && direction > 0 || bat.getX() >= 40 && direction < 0) {
+                    float dist = direction * BAT_MOVE * level;    // Actual distance to move
+                    Debug.trace("Model: Move bat = %6.2f", dist);
+                    bat.moveX(dist);
+                }
+            } else {
+                if (bat.getX() < 420 && direction > 0 || bat.getX() > 30 && direction < 0) {
+                    float dist = direction * BAT_MOVE * level;    // Actual distance to move
+                    Debug.trace("Model: Move bat = %6.2f", dist);
+                    bat.moveX(dist);
+                }
             }
         }
     }
@@ -189,8 +192,8 @@ public class Model extends Observable {
 
         public void runAsSeparateThread() {
             float S = speed; // Units to move (Speed)
-
             boolean hitBottom = false;
+
             try {
                 synchronized(Model.class) {         // Make thread safe
                     GameObj ball = getBall();       // Ball in game
@@ -200,7 +203,7 @@ public class Model extends Observable {
 
                 while (runGame) {
                     synchronized (Model.class) { // Make thread safe
-                        float x = ball.getX();  // Current x,y position
+                        float x = ball.getX();   // Current x,y position
                         float y = ball.getY();
 
                         sound.mute = mute;
@@ -238,7 +241,7 @@ public class Model extends Observable {
                                     brick.setVisibility(false);
 
                                     //System.out.println(PowerUps.bSquared.apply(2));
-                                    if(brick.getPowerUp()) {
+                                    if (brick.getPowerUp()) {
                                         // System.out.println("powerup found--- l1 model");
                                         // System.out.println(PowerUps.bSquared.apply(2));
                                         Collections.shuffle(powerUps);
@@ -305,6 +308,7 @@ public class Model extends Observable {
                         }
 
                         bricks.stream()
+                                .filter(e -> !pause)
                                 .filter(e -> level == 1)
                                 .filter(brk -> !brk.isVisible())
                                 .filter(brk -> brk.getReturnTimes() < 1)
@@ -327,13 +331,14 @@ public class Model extends Observable {
                             stop();
                         }
                     }
+
                     if (hitBottom && !gameOver) {
-                        try{
+                        try {
                             ball.setVisibility(false);
                             modelChanged();
                             Thread.sleep(1000);
-                            ball.setTopX(bat.getX()+(bat.getWidth()/2));
-                            ball.setTopY(H/2);
+                            ball.setTopX(bat.getX() + (bat.getWidth() / 2));
+                            ball.setTopY(H / 2);
                             modelChanged();
                             Thread.sleep(100);
                             ball.setColour(Colour.RED);
@@ -344,22 +349,24 @@ public class Model extends Observable {
                             Thread.sleep(100);
                             ball.changeDirectionY();
                             ball.setColour(Colour.SILVER);
-                            hitBottom =false;
+                            hitBottom = false;
                         } catch (Exception e) {
                             System.out.println(e);
                         }
                     }
 
                     modelChanged(); // Model changed refresh screen
-                    if (startGame) {
+                    if (startGame && !pause) {
                         Thread.sleep(fast ? 2 : 10);
                         ball.moveX(S);
                         ball.moveY(S);
                     }
+
                 }
             } catch (Exception e) {
                 Debug.error("Model.runAsSeparateThread - Error\n%s", e.getMessage());
             }
+
         }
     }
 
