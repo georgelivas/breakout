@@ -43,7 +43,19 @@ The all time classic arcade game. The goal is to break all the bricks and get a 
 2. Save the file.
 3. Open the app.
 
-# ▶️How to play
+# How to play
+> This game doesn't support mouse interaction.
+
+
+|  Key  |       action     |       usage     |
+| :---: | :--------------: | :-------------: |
+| ENTER | Select or Return |   Used in menu  |
+| ⬆    | Go up         	|   Used in menu  |
+| ⬇ 	 | Go down       	|   Used in menu  |
+| ⬅    | Go left			|   Move the bat  |
+| ➡    | Go right			|   Move the bat  |
+| v	    | Mute / Unmute    | Used during game |
+| p	    | Play / Pause     | Used during game |
 
 # License
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/georgelivas/breakout/blob/master/LICENSE) file for details
