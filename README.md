@@ -1,5 +1,5 @@
 # ![](src/readme_src/logo.png)
-
+<link rel="shortcut icon" type="image/x-icon" href="src/readme_src/favicon.ico">
 <p align="center">
     <a align="center"><img src="https://img.shields.io/packagist/l/doctrine/orm.svg"></a>
     <a align="center" href=""><img src="https://img.shields.io/badge/platform-macOS%20%7C%20Windows-ff69b4.svg"></a>
