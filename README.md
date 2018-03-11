@@ -30,9 +30,9 @@ The all time classic arcade game. The goal is to break all the bricks and get a 
 1. Download the latest Breakout.dmg release from [Releases](https://github.com/georgelivas/breakout/releases/tag/V3.2(2.0)).
 2. Drag and drop the app to your Applications folder.
 3. Open the app.
-    >If a window like this one comes up,
-    >
-    >go to:
+    > If a window like this one comes up,
+    > ![](src/readme_src/UD.jpeg)
+    > go to:
     ``
     System Preferences > Security & Privacy > General > (click) Open Anyway
     ``
