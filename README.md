@@ -3,8 +3,8 @@
 <p align="center">
     <a align="center"><img src="https://img.shields.io/packagist/l/doctrine/orm.svg"></a>
     <a align="center" href=""><img src="https://img.shields.io/badge/platform-macOS%20%7C%20Windows-ff69b4.svg"></a>
-    <a align="center" href=""><img src="https://img.shields.io/badge/version-3.2-red.svg"></a>
     <a align="center" href=""><img src="https://img.shields.io/badge/release%20date-March%2010-orange.svg"></a>
+    <a align="center" href=""><img src="https://img.shields.io/badge/version-3.2-red.svg"></a>
     <a align="center" href=""><img src="https://img.shields.io/badge/size-1.1MB-yellow.svg"></a>
     <a align="center" href="http://georgelivas.site"><img src="https://img.shields.io/badge/Visit%20my-Blog-brightgreen.svg"></a>
 </p>
@@ -17,7 +17,7 @@
 </p>
 
 # Description
-The all time classic arcade game. The goal is to break all the bricks and get a high score, without dropping the ball. You have only ❤❤❤ lives.
+The all time classic arcade game. The goal is to break all the bricks and get a high score, without dropping the ball. You have ❤❤❤ lives.
 
 # System requirements
 
