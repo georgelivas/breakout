@@ -57,11 +57,11 @@ After openig the app, use ``up, down and ENTER`` keys to select level. Then cont
 | :-------: | :--------------: | :-------------: |
 | ``ENTER`` | Select or Return |   Used in menu  |
 | ⬆        | Go up            |   Used in menu  |
-| ⬇ 	     | Go down          |   Used in menu  |
+| ⬇ 	    | Go down          |   Used in menu  |
 | ⬅        | Go left          |   Move the bat  |
 | ➡         | Go right         |   Move the bat  |
 | ``w``     | Go up            |   Used in menu  |
-| ``s`` 	  | Go down          |   Used in menu  |
+| ``s`` 	| Go down          |   Used in menu  |
 | ``a``     | Go left          |   Move the bat  |
 | ``d``     | Go right         |   Move the bat  |
 | ``v``     | Mute / Unmute    | Used during game |
