@@ -69,5 +69,13 @@ After openig the app, use ``up, down and ENTER`` keys to select level. Then cont
 | ``f``     | Super fast       | Increase the speed of the ball |
 | ``n``     | Normal speed     | Reset speed to normal |
 
+# Troubleshooting
+![](src/readme_src/NoJDK.jpeg)
+
+* Make sure you have installed the latest 
+	* Java
+	* JRE
+	* JDK
+
 # License
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/georgelivas/breakout/blob/master/LICENSE) file for details
