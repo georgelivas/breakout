@@ -72,10 +72,10 @@ After openig the app, use ``up, down and ENTER`` keys to select level. Then cont
 # Troubleshooting
 ![](src/readme_src/NoJDK.jpeg)
 
-* Make sure you have installed the latest 
-	* Java
-	* JRE
-	* JDK
+* Make sure you have installed the latest:
+	* [Java](https://java.com/en/download/)
+	* [JRE](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)
+	* [JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 
 # License
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/georgelivas/breakout/blob/master/LICENSE) file for details
