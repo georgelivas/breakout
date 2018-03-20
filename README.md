@@ -76,6 +76,7 @@ After openig the app, use ``up, down and ENTER`` keys to select level. Then cont
 	* [Java](https://java.com/en/download/)
 	* [JRE](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)
 	* [JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+* and you have at least 300MB of RAM free.
 
 # License
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/georgelivas/breakout/blob/master/LICENSE) file for details
